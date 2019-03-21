@@ -30,3 +30,18 @@ export HOME_POSTCODE='ENTER POSTCODE'
 ```
 python itemfinder.py
 ```
+
+
+## Future work
+
+### Release 1:
+Email a list of found items to a given email address - possible email template in `email-template.txt`.
+
+### Release 2:
+Add distance from station to seller postcode after the item title - approaches here: https://stackoverflow.com/questions/44176381/calculate-road-travel-distance-between-postcodes-zipcodes-python
+
+### Release 3:
+Show new items only - implies storing item nos parsed
+
+### Release 4:
+Remove duplicate locations, only showing the item associated with the closest station.

@@ -1,0 +1,25 @@
+Subject: [ebay-multilocation-item-finder] Found 2 new items
+
+
+
+* = duplicate
+
+brompton
+========
+
+Teignmouth:
+Brompton SL2 Folding Bike - White - 2 speed (£23.67, 5d 3h left, EX12 1JH)
+
+Dawlish
+*Brompton SL2 Folding Bike - White - 2 speed (£23.67, 5d 3h left, EX12 1JH)
+
+
+
+tile cutter
+========
+
+Highbridge & Burnham:
+Brompton SL2 Folding Bike - White - 2 speed (£23.0, 5d 3h left, EX12 1JH)
+
+Yatton:
+*Brompton SL2 Folding Bike - White - 2 speed (£9.00, 0d 3h left, BS48 7KP)
