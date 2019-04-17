@@ -28,7 +28,20 @@ export HOME_POSTCODE='ENTER POSTCODE'
 
 ## Running the item finder
 ```
-python itemfinder.py
+python ebay_multilocation_item_finder/itemfinder.py
+```
+
+
+## Tests
+
+Unit tests can be run using Pytest:
+
+```
+# Download dev requirements
+pip install -r requirements_dev.txt
+
+# Run the tests
+pytest
 ```
 
 
