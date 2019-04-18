@@ -41,7 +41,7 @@ stations = [
 ]
 
 
-def get_results_dict(search_keywords, stations):
+def get_results_dict(search_keywords, stations, default_search_radius=5):
     """Return a nested dictionary containing results for the input search keyword and locations.
 
     Inputs:
@@ -66,7 +66,7 @@ def get_results_dict(search_keywords, stations):
         for station in stations:
             station_name = station[0]
             postcode = station[1]
-            max_distance = '5'
+            max_distance = default_search_radius
             try:
                 max_distance = str(station[2])
             except IndexError:
