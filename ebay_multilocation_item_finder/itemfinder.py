@@ -12,7 +12,7 @@ search_keywords = [
     'tile cutter'
 ]
 
-stations = [
+search_locations = [
     #  (Location name, UK location postcode, search radius in miles (optional))
     ('Office', os.environ['OFFICE_POSTCODE'], 20),
     ('Plymouth', 'PL4 6AB', 20),
@@ -41,12 +41,12 @@ stations = [
 ]
 
 
-def get_results_dict(search_keywords, stations, default_search_radius=5):
+def get_results_dict(search_keywords, search_locations, default_search_radius=5):
     """Return a nested dictionary containing results for the input search keyword and locations.
 
     Inputs:
         search_keywords (list of str) -- List of eBay search keyword strings
-        stations (list of tuples) -- List of locations tuples in the format (Location name, UK location postcode, search radius in miles (optional))
+        search_locations (list of tuples) -- List of locations tuples in the format (Location name, UK location postcode, search radius in miles (optional))
 
     Returns:
         dict (of dicts) -- A two-dimensional dictionary containing search keywords (keys) and location search results (key, value pairs)
@@ -63,12 +63,12 @@ def get_results_dict(search_keywords, stations, default_search_radius=5):
     for keyword in search_keywords:
         results[keyword] = dict()
 
-        for station in stations:
-            station_name = station[0]
-            postcode = station[1]
+        for search_location in search_locations:
+            search_location_name = search_location[0]
+            postcode = search_location[1]
             max_distance = default_search_radius
             try:
-                max_distance = str(station[2])
+                max_distance = str(search_location[2])
             except IndexError:
                 pass
 
@@ -103,17 +103,17 @@ def get_results_dict(search_keywords, stations, default_search_radius=5):
                 print(e)
                 print(e.response.dict())
 
-            print("Search keyword: {} - Station: {} - Results {}".format(
+            print("Search keyword: {} - search_location: {} - Results {}".format(
                 keyword,
-                station,
+                search_location,
                 response.reply.searchResult._count
             ))
 
             # Append search result to the output dictionary
-            results[keyword][station_name] = response.reply.searchResult  # ebaysdk.response.ResponseDataObject
+            results[keyword][search_location_name] = response.reply.searchResult  # ebaysdk.response.ResponseDataObject
 
     return results
 
 if __name__ == '__main__':
-    results_dict = get_results_dict(search_keywords, stations)
+    results_dict = get_results_dict(search_keywords, search_locations)
     import pdb; pdb.set_trace()
