@@ -5,6 +5,7 @@ from ebaysdk.finding import Connection
 
 
 search_keywords = [
+    # Search keyword string
     'brompton',
     '(bike, cycle) trailer',
     'sack truck',
@@ -12,6 +13,7 @@ search_keywords = [
 ]
 
 stations = [
+    #  (Location name, UK location postcode, search radius in miles (optional))
     ('Office', os.environ['OFFICE_POSTCODE'], 20),
     ('Plymouth', 'PL4 6AB', 20),
     ('Ivybridge', 'PL21 0DQ'),
@@ -40,6 +42,16 @@ stations = [
 
 
 def get_results_dict(search_keywords, stations):
+    """Return a nested dictionary containing results for the input search keyword and locations.
+
+    Inputs:
+        search_keywords (list of str) -- List of eBay search keyword strings
+        stations (list of tuples) -- List of locations tuples in the format (Location name, UK location postcode, search radius in miles (optional))
+
+    Returns:
+        dict (of dicts) -- A two-dimensional dictionary containing search keywords (keys) and location search results (key, value pairs)
+                           An example ebaysdk.response.ResponseDataObject (representing an item search result) can be found in tests/test_itemfinder.py
+    """
     results = dict()
 
     api = Connection(
@@ -72,6 +84,7 @@ def get_results_dict(search_keywords, stations):
                              'value': max_distance},
                             {'name': 'LocalPickupOnly',
                              'value': True},
+                            # Params for searching for sold items:
                             # {'name': 'SoldItemsOnly',
                             #  'value': True}
                         ],
@@ -80,7 +93,7 @@ def get_results_dict(search_keywords, stations):
 
                 # Search for listings
                 response = api.execute('findItemsAdvanced', api_payload)
-                #  findCompletedItems
+                #  API verb for completed items: findCompletedItems
 
                 assert(response.reply.ack == 'Success')
                 assert(type(response.reply.timestamp) == datetime.datetime)
@@ -98,10 +111,6 @@ def get_results_dict(search_keywords, stations):
 
             # Append search result to the output dictionary
             results[keyword][station_name] = response.reply.searchResult  # ebaysdk.response.ResponseDataObject
-
-            """
-            Example ebaysdk.response.ResponseDataObject (representing an item search result) can be found in tests/test_itemfinder.py
-            """
 
     return results
 
