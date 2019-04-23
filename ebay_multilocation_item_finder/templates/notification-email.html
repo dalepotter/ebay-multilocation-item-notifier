@@ -1,0 +1,18 @@
+<p>The following items were found for the specified locations listed:</p>
+
+{% for keyword, items_by_location in results.items() -%}
+  <p><strong>{{ keyword }}</strong></p>
+  <ul>
+  {% for location, items_list in items_by_location.items() -%}
+    {% if items_list._count|int > 0 %}
+      {% for item in items_list.item -%}
+        <li>
+          {{ location }}:
+          <a href="{{ item.viewItemURL }}">{{ item.title }}</a> -
+          ({{ item.sellingStatus.currentPrice.value }}, {{ item.sellingStatus.bidCount }} bids, {{ item.postalCode }}, Ends {{ item.listingInfo.endTime }})
+        </li>
+      {%- endfor %}
+    {% endif %}
+  {%- endfor %}
+  </ul>
+{%- endfor %}

@@ -1,1 +1,2 @@
 ebaysdk==2.1.5
+emails==0.5.15
