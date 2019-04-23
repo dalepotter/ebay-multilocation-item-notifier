@@ -100,7 +100,8 @@ def get_results_dict(search_keywords, search_locations, default_search_radius=5)
                 assert(type(response.reply.timestamp) == datetime.datetime)
                 assert(type(response.dict()) == dict)
 
-            except ConnectionError as e:
+            except Exception as e:
+                print(type(e))
                 print(e)
                 print(e.response.dict())
 
