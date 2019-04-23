@@ -96,6 +96,8 @@ def get_results_dict(search_keywords, search_locations, default_search_radius=5)
                 response = api.execute('findItemsAdvanced', api_payload)
                 #  API verb for completed items: findCompletedItems
 
+                print(response.reply)
+
                 assert(response.reply.ack == 'Success')
                 assert(type(response.reply.timestamp) == datetime.datetime)
                 assert(type(response.dict()) == dict)
