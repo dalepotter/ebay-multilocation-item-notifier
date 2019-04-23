@@ -22,8 +22,15 @@ source pyenv/bin/activate
 pip install -r requirements.txt
 
 # Set environment variables
-export OFFICE_POSTCODE='ENTER POSTCODE'
-export HOME_POSTCODE='ENTER POSTCODE'
+export OFFICE_POSTCODE='<Enter postcode>'
+export HOME_POSTCODE='<Enter postcode>'
+export EMAIL_SENDER_NAME='<Enter sender name>'
+export EMAIL_SENDER_ADDRESS='<Enter email sender address>'
+export EMAIL_RECIPIENT_NAME='<Enter email recipient name>'
+export EMAIL_RECIPIENT_ADDRESS='<Enter email recipient address>'
+export EMAIL_SMTP_HOST='<Enter email stmp host>'
+export EMAIL_SMTP_USERNAME='<Enter email smtp username>'
+export EMAIL_SMTP_PASSWORD='<Enter email smtp password>'
 ```
 
 ## Running the item finder

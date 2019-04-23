@@ -1,7 +1,9 @@
 import datetime
 import os
+import emails
 from ebaysdk.exception import ConnectionError
 from ebaysdk.finding import Connection
+from utils import render_email_template
 
 
 search_keywords = [
@@ -116,4 +118,19 @@ def get_results_dict(search_keywords, search_locations, default_search_radius=5)
 
 if __name__ == '__main__':
     results_dict = get_results_dict(search_keywords, search_locations)
-    import pdb; pdb.set_trace()
+
+    html_summary = render_email_template(results_dict)
+
+    message = emails.html(
+        subject='[ebay-multilocation-item-finder] Item summary',
+        html=html_summary,
+        mail_from=(os.environ['EMAIL_SENDER_NAME'], os.environ['EMAIL_SENDER_ADDRESS'])
+    )
+    req = message.send(to=(os.environ['EMAIL_RECIPIENT_NAME'], os.environ['EMAIL_RECIPIENT_ADDRESS']),
+                       smtp={'host': os.environ['EMAIL_SMTP_HOST'],
+                             'port': 465,
+                             'ssl': True,
+                             'user': os.environ['EMAIL_SMTP_USERNAME'],
+                             'password': os.environ['EMAIL_SMTP_PASSWORD']}
+                       )
+    assert req.status_code == 250
