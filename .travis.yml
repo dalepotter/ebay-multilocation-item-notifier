@@ -3,6 +3,6 @@ python:
   - "3.6"
 install:
   - pip install -r requirements_dev.txt
-after_success:
-  - python itemfinder.py
 script:  py.test
+after_success:
+  - python ebay_multilocation_item_finder/itemfinder.py
