@@ -103,7 +103,6 @@ def get_results_dict(search_keywords, search_locations, default_search_radius=5)
             except Exception as e:
                 print(type(e))
                 print(e)
-                print(e.response.dict())
 
             print("Search keyword: {} - search_location: {} - Results {}".format(
                 keyword,
