@@ -5,4 +5,5 @@ install:
   - pip install -r requirements_dev.txt
 script:  py.test
 after_success:
-  - python ebay_multilocation_item_finder/itemfinder.py
+  - test $TRAVIS_BRANCH = "master" &&
+    python ebay_multilocation_item_finder/itemfinder.py
