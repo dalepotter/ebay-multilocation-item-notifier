@@ -10,7 +10,8 @@ search_keywords = [
     'brompton',
     '(bike, cycle) trailer',
     'sack truck',
-    'tile cutter'
+    'tile cutter',
+    'hp (printer, scanner)'
 ]
 
 search_locations = [
