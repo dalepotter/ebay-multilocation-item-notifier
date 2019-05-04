@@ -9,8 +9,7 @@ search_keywords = [
     # Search keyword string
     'brompton',
     '(bike, cycle) trailer',
-    'sack truck',
-    'tile cutter',
+    'sack truck -(antique, vintage, wooden)',
     'hp (printer, scanner)'
 ]
 
