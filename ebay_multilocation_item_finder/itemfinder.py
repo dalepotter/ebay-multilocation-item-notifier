@@ -10,7 +10,8 @@ search_keywords = [
     'brompton',
     '(bike, cycle) trailer',
     'sack truck -(antique, vintage, wooden)',
-    'hp (printer, scanner)'
+    '(headphones, earphones)',
+    'radio (roberts, vintage)'
 ]
 
 search_locations = [
