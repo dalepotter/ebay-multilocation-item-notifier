@@ -11,7 +11,7 @@ search_keywords = [
     '(bike, cycle) trailer',
     'sack truck -(antique, vintage, wooden)',
     '(headphones, earphones)',
-    'radio (roberts, vintage)'
+    'radio (roberts, vintage) -(magazines, times, car, value, valves)'
 ]
 
 search_locations = [
