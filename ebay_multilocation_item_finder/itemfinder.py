@@ -16,6 +16,13 @@ search_keywords = [
 
 search_locations = [
     #  (Location name, UK location postcode, search radius in miles (optional))
+    ('Gunnislake', 'PL18 9DZ'),
+    ('Calstock', 'PL18 9QY'),
+    ('Bere Alston', 'PL20 7EP'),
+    ('Bere Ferrers', 'PL20 7JS'),
+
+    ('Tavistock', 'PL19 8AY'),
+
     ('Office', os.environ['OFFICE_POSTCODE'], 20),
     ('Plymouth', 'PL4 6AB', 20),
     ('Ivybridge', 'PL21 0DQ'),
