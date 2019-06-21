@@ -8,10 +8,10 @@ from ebaysdk.finding import Connection
 search_keywords = [
     # Search keyword string
     'brompton',
-    '(bike, cycle) trailer',
+    '(bicycle, bike, cycle) trailer -(car, quad, quadbike, motor, motorbike, motorcycle)',
     'sack truck -(antique, vintage, wooden)',
     '(headphones, earphones)',
-    'radio (roberts, vintage) -(magazines, times, car, value, valves)'
+    'radio (roberts, vintage) -(magazines, times, car, valve, valves)'
 ]
 
 search_locations = [
