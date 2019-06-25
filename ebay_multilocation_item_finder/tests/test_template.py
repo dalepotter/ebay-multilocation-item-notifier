@@ -1,7 +1,7 @@
 import ebaysdk.response
 import pytest
 import ebay_multilocation_item_finder.tests.conftest as conftest
-from ..utils import render_email_template
+from ebay_multilocation_item_finder.utils import render_email_template
 
 
 @pytest.fixture

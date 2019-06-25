@@ -1,5 +1,5 @@
 import ebaysdk
-from ..itemfinder import get_results_dict
+from ebay_multilocation_item_finder.itemfinder import get_results_dict
 
 
 def test_get_results_empty_input_returns_empty_dict(mocker, mock_response_three_items):

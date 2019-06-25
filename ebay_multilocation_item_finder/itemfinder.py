@@ -3,7 +3,7 @@ import os
 import emails
 from ebaysdk.exception import ConnectionError
 from ebaysdk.finding import Connection
-
+from ebay_multilocation_item_finder.utils import render_email_template
 
 search_keywords = [
     # Search keyword string
@@ -124,7 +124,6 @@ def get_results_dict(search_keywords, search_locations, default_search_radius=5)
     return results
 
 if __name__ == '__main__':
-    from utils import render_email_template  # FIXME: Move to top of file
     results_dict = get_results_dict(search_keywords, search_locations)
 
     html_summary = render_email_template(results_dict)
