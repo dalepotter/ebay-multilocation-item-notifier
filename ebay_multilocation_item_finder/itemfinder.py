@@ -3,10 +3,10 @@ import os
 import emails
 from ebaysdk.exception import ConnectionError
 from ebaysdk.finding import Connection
-from ebay_multilocation_item_finder.utils import render_email_template
+from ebay_multilocation_item_finder.utils import generate_item_filter_list, render_email_template
 
 search_keywords = [
-    # Search keyword string
+    # Search keyword string (str), custom item filter (list of dicts)
     'brompton',
     '(bike, cycle) trailer',
     'sack truck -(antique, vintage, wooden)',
@@ -81,22 +81,15 @@ def get_results_dict(search_keywords, search_locations, default_search_radius=5)
             except IndexError:
                 pass
 
+            custom_item_filters = [
+                {'name': 'MaxDistance',
+                 'value': max_distance}
+            ]
+
             try:
                 api_payload = {
                         'keywords': keyword,
-                        'itemFilter': [
-                            {'name': 'Condition',
-                             'value': 'Used'},
-                            {'name': 'ListingType',
-                             'value': 'Auction'},
-                            {'name': 'MaxDistance',
-                             'value': max_distance},
-                            {'name': 'LocalPickupOnly',
-                             'value': True},
-                            # Params for searching for sold items:
-                            # {'name': 'SoldItemsOnly',
-                            #  'value': True}
-                        ],
+                        'itemFilter': generate_item_filter_list(custom_item_filters),
                         'buyerPostalCode': postcode
                     }
 
