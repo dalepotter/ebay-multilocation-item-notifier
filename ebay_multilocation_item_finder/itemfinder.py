@@ -11,7 +11,10 @@ search_keywords = [
     '(bicycle, bike, cycle) trailer -(car, quad, quadbike, motor, motorbike, motorcycle)',
     'sack truck -(antique, vintage, wooden)',
     '(headphones, earphones)',
-    'radio (roberts, vintage) -(magazines, times, car, valve, valves)'
+    'radio (roberts, vintage) -(magazines, times, car, valve, valves)',
+    'bell tent',
+    '(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent',
+    '(bike, bicycle)'
 ]
 
 search_locations = [
