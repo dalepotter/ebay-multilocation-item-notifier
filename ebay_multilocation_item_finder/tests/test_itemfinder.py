@@ -8,8 +8,7 @@ def test_get_results_api_receives_expected_payload(mocker, mock_response_three_i
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
     mock_search_keywords = [
         ['search keyword 1', [
-            {'name': 'MaxPrice',
-             'value': 25}
+            {'name': 'MaxPrice', 'value': 25}
         ]]
     ]
     mock_search_locations = [

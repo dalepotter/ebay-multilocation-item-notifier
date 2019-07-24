@@ -9,12 +9,10 @@ searches = [
     # (Search keyword string (str), [optional] custom item filters (list of dicts))
     ['brompton'],
     ['(bike, cycle) trailer', [
-        {'name': 'MaxPrice',
-         'value': 25}
+        {'name': 'MaxPrice', 'value': 25}
     ]],
     ['sack truck -(antique, vintage, wooden)', [
-        {'name': 'MaxPrice',
-         'value': 20}
+        {'name': 'MaxPrice', 'value': 20}
     ]],
     ['radio (roberts, vintage) -(magazines, times, car, value, valves)', [
         {'name': 'MaxPrice',
