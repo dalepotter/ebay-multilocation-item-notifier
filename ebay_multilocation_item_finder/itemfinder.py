@@ -17,9 +17,15 @@ searches = [
     ['radio (roberts, vintage) -(magazines, times, car, valve, valves)', [
         {'name': 'MaxPrice', 'value': 10}
     ]],
-    ['(headphones, earphones)'],
-    ['(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent'],
-    ['(bike, bicycle)']
+    ['(headphones, earphones)', [
+        {'name': 'MaxPrice', 'value': 10}
+    ]],
+    ['(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent', [
+        {'name': 'MaxPrice', 'value': 40}
+    ]],
+    ['(bike, bicycle) -(motor, quad)', [
+        {'name': 'MaxPrice', 'value': 40}
+    ]]
 ]
 
 search_locations = [
