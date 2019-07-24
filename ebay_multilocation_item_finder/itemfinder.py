@@ -8,7 +8,7 @@ from ebay_multilocation_item_finder.utils import generate_item_filter_list, rend
 searches = [
     # (Search keyword string (str), [optional] custom item filters (list of dicts))
     ['brompton'],
-    ['folding (bike, bicycle)'],
+    ['folding (bike, bicycle) -(exercise, motor, quad, rack)'],
     ['(bike, cycle) trailer', [
         {'name': 'MaxPrice', 'value': 25}
     ]],
@@ -24,8 +24,8 @@ searches = [
     ['(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent', [
         {'name': 'MaxPrice', 'value': 40}
     ]],
-    ['(bike, bicycle) -(motor, quad)', [
-        {'name': 'MaxPrice', 'value': 40}
+    ['(bike, bicycle) -(exercise, motor, quad, rack)', [
+        {'name': 'MaxPrice', 'value': 20}
     ]]
 ]
 
