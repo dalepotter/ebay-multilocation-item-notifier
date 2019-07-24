@@ -7,7 +7,7 @@ DEFAULT_ITEM_FILTER_LIST = [
     {'name': 'ListingType',
      'value': 'Auction'},
     {'name': 'MaxDistance',
-     'value': 5},
+     'value': '5'},
     {'name': 'LocalPickupOnly',
      'value': True},
     # Params for searching for sold items:

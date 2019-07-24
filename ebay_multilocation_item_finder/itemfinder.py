@@ -5,13 +5,22 @@ from ebaysdk.exception import ConnectionError
 from ebaysdk.finding import Connection
 from ebay_multilocation_item_finder.utils import generate_item_filter_list, render_email_template
 
-search_keywords = [
-    # Search keyword string (str), custom item filter (list of dicts)
-    'brompton',
-    '(bike, cycle) trailer',
-    'sack truck -(antique, vintage, wooden)',
-    '(headphones, earphones)',
-    'radio (roberts, vintage) -(magazines, times, car, value, valves)'
+searches = [
+    # (Search keyword string (str), [optional] custom item filters (list of dicts))
+    ['brompton'],
+    ['(bike, cycle) trailer', [
+        {'name': 'MaxPrice',
+         'value': 25}
+    ]],
+    ['sack truck -(antique, vintage, wooden)', [
+        {'name': 'MaxPrice',
+         'value': 20}
+    ]],
+    ['radio (roberts, vintage) -(magazines, times, car, value, valves)', [
+        {'name': 'MaxPrice',
+         'value': 10}
+    ]],
+    ['(headphones, earphones)']
 ]
 
 search_locations = [
@@ -54,7 +63,7 @@ def get_results_dict(search_keywords, search_locations, default_search_radius=5)
     """Return a nested dictionary containing results for the input search keyword and locations.
 
     Inputs:
-        search_keywords (list of str) -- List of eBay search keyword strings
+        search_keywords (list of lists) -- List of eBay search keyword strings
         search_locations (list of tuples) -- List of locations tuples in the format (Location name, UK location postcode, search radius in miles (optional))
 
     Returns:
@@ -69,19 +78,26 @@ def get_results_dict(search_keywords, search_locations, default_search_radius=5)
             config_file=None
     )
 
-    for keyword in search_keywords:
+    for search_list in search_keywords:
+        keyword = search_list[0]
+
         results[keyword] = dict()
 
         for search_location in search_locations:
             search_location_name = search_location[0]
             postcode = search_location[1]
-            max_distance = default_search_radius
+            max_distance = str(default_search_radius)
+            try:
+                item_filters = search_list[1].copy()
+            except IndexError:
+                item_filters = []
+                pass
             try:
                 max_distance = str(search_location[2])
             except IndexError:
                 pass
 
-            custom_item_filters = [
+            item_filters += [
                 {'name': 'MaxDistance',
                  'value': max_distance}
             ]
@@ -89,7 +105,7 @@ def get_results_dict(search_keywords, search_locations, default_search_radius=5)
             try:
                 api_payload = {
                         'keywords': keyword,
-                        'itemFilter': generate_item_filter_list(custom_item_filters),
+                        'itemFilter': generate_item_filter_list(item_filters),
                         'buyerPostalCode': postcode
                     }
 
@@ -117,7 +133,7 @@ def get_results_dict(search_keywords, search_locations, default_search_radius=5)
     return results
 
 if __name__ == '__main__':
-    results_dict = get_results_dict(search_keywords, search_locations)
+    results_dict = get_results_dict(searches, search_locations)
 
     html_summary = render_email_template(results_dict)
 

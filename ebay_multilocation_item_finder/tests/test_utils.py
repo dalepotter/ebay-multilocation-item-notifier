@@ -11,7 +11,7 @@ def test_generate_item_filter_list_default():
         {'name': 'ListingType',
          'value': 'Auction'},
         {'name': 'MaxDistance',
-         'value': 5},
+         'value': '5'},
         {'name': 'LocalPickupOnly',
          'value': True},
     ]
@@ -64,17 +64,48 @@ def test_generate_item_filter_list_with_conflicts():
         {'name': 'MaxPrice',
          'value': 5}
     ]
-    custom_item_filters_non_conflicting = [
+    custom_item_filters_conflicting_name = [
         {'name': 'MaxPrice',
          'value': 10}
     ]
 
     result = generate_item_filter_list(
-        custom_item_filters_non_conflicting,
+        custom_item_filters_conflicting_name,
         mock_default_item_filter
     )
 
     assert result == [
         {'name': 'MaxPrice',
          'value': 10}
+    ]
+
+
+def test_generate_item_filter_list_independence():
+    """Repeated calls to generate an item filter list must be independent from previous calls."""
+    mock_default_item_filter = [
+        {'name': 'MaxPrice',
+         'value': 5}
+    ]
+    custom_item_filters_itererable = [
+        [
+            {'name': 'Condition',
+             'value': 'Used'}
+        ],
+        [
+            {'name': 'ListingType',
+             'value': 'Auction'}
+        ]
+    ]
+
+    for custom_item_filter in custom_item_filters_itererable:
+        result = generate_item_filter_list(
+            custom_item_filter,
+            mock_default_item_filter
+        )
+
+    assert result == [
+        {'name': 'ListingType',
+         'value': 'Auction'},
+        {'name': 'MaxPrice',
+         'value': 5}
     ]
