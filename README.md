@@ -1,8 +1,8 @@
 # Ebay Multilocation Item Finder
 
-Searches the ebay API for items located within a set of postcodes using the [ebaysdk-python](https://github.com/timotheus/ebaysdk-python).
+Searches the ebay API for items located within a set of postcodes using the [ebaysdk-python](https://github.com/timotheus/ebaysdk-python) and sends an email summarising results.
 
-Search keywords and location postcodes are definted within `itemfinder.py`.
+Search keywords and location postcodes are definted within `ebay_multilocation_item_finder/itemfinder.py`.
 
 
 ## Set-up
@@ -18,7 +18,7 @@ cd ebay-multilocation-item-finder
 python3 -m venv pyenv
 source pyenv/bin/activate
 
-# Download requirements
+# Install as a package
 pip install -r requirements.txt
 
 # Set environment variables
@@ -44,7 +44,7 @@ python ebay_multilocation_item_finder/itemfinder.py
 Unit tests can be run using Pytest:
 
 ```
-# Download dev requirements
+# Install dev requirements
 pip install -r requirements_dev.txt
 
 # Run the tests
@@ -54,14 +54,11 @@ pytest
 
 ## Future work
 
-### Release 1:
-Email a list of found items to a given email address - possible email template in `email-template.txt`.
-
-### Release 2:
+### Iteration 2:
 Add distance from station to seller postcode after the item title - approaches here: https://stackoverflow.com/questions/44176381/calculate-road-travel-distance-between-postcodes-zipcodes-python
 
-### Release 3:
+### Iteration 3:
 Show new items only - implies storing item nos parsed
 
-### Release 4:
+### Iteration 4:
 Remove duplicate locations, only showing the item associated with the closest station.
