@@ -14,7 +14,7 @@ searches = [
     ['sack truck -(antique, vintage, wooden)', [
         {'name': 'MaxPrice', 'value': 20}
     ]],
-    ['radio (roberts, vintage) -(magazines, times, car, value, valves)', [
+    ['radio (roberts, vintage) -(magazines, times, car, valve, valves)', [
         {'name': 'MaxPrice', 'value': 10}
     ]],
     ['(headphones, earphones)'],
