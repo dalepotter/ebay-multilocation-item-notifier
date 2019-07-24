@@ -8,6 +8,7 @@ from ebay_multilocation_item_finder.utils import generate_item_filter_list, rend
 searches = [
     # (Search keyword string (str), [optional] custom item filters (list of dicts))
     ['brompton'],
+    ['folding (bike, bicycle)'],
     ['(bike, cycle) trailer', [
         {'name': 'MaxPrice', 'value': 25}
     ]],
