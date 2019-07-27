@@ -24,8 +24,8 @@ searches = [
     ['(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent', [
         {'name': 'MaxPrice', 'value': 40}
     ]],
-    ['(bike, bicycle) -(exercise, motor, quad, rack)', [
-        {'name': 'MaxPrice', 'value': 20}
+    ['(bike, bicycle) -(boys, childs, exercise, girls, journal, kids, magazine, motor, quad, rack)', [
+        {'name': 'MaxPrice', 'value': 15}
     ]]
 ]
 
