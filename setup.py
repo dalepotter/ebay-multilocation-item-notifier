@@ -15,6 +15,6 @@ setup(
     install_requires=[
         "ebaysdk==2.1.5",
         "emails==0.5.15",
-        "Jinja2==2.10"
+        "Jinja2==2.10.1"
     ]
 )
