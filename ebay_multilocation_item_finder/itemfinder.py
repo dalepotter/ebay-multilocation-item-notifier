@@ -34,6 +34,16 @@ searches = [
 
 search_locations = [
     #  (Location name, UK location postcode, search radius in miles (optional))
+    ('Saltash', 'PL12 4EB'),
+    ('St Germans', 'PL12 5LS'),
+    ('Liskeard', 'PL14 4DX'),
+    ('Bodmin Parkway', 'PL30 4BB'),
+
+    ('St Keyne Wishing Well Halt', 'PL14 4SE'),
+    ('Causeland', 'PL14 4ST'),
+    ('Sandplace', 'PL13 1PJ'),
+    ('Looe', 'PL13 1HN'),
+
     ('Gunnislake', 'PL18 9DZ'),
     ('Calstock', 'PL18 9QY'),
     ('Bere Alston', 'PL20 7EP'),
