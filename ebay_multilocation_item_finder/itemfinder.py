@@ -7,7 +7,7 @@ from ebay_multilocation_item_finder.utils import generate_item_filter_list, rend
 
 searches = [
     # (Search keyword string (str), [optional] custom item filters (list of dicts))
-    ['dyson', [
+    ['dyson -(ball, dryer, parts, play, spares, toy)', [
         {'name': 'MaxPrice', 'value': 80}
     ]],
     ['brompton'],
