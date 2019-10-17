@@ -1,4 +1,4 @@
-Subject: [ebay-multilocation-item-finder] Found 2 new items
+Subject: [ebay_multilocation_item_notifier] Found 2 new items
 
 
 

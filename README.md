@@ -1,8 +1,8 @@
-# Ebay Multilocation Item Finder
+# Ebay Multilocation Item Notifier
 
 Searches the ebay API for items located within a set of postcodes using the [ebaysdk-python](https://github.com/timotheus/ebaysdk-python) and sends an email summarising results.
 
-Search keywords and location postcodes are definted within `ebay_multilocation_item_finder/itemfinder.py`.
+Search keywords and location postcodes are definted within `ebay_multilocation_item_notifier/itemfinder.py`.
 
 
 ## Set-up
@@ -11,8 +11,8 @@ This is built using python 3.6.
 
 ```
 # Clone the repository
-git clone https://github.com/dalepotter/ebay-multilocation-item-finder.git
-cd ebay-multilocation-item-finder
+git clone https://github.com/dalepotter/ebay_multilocation_item_notifier.git
+cd ebay_multilocation_item_notifier
 
 # Set up and activate a virtual environment
 python3 -m venv pyenv
@@ -33,9 +33,9 @@ export EMAIL_SMTP_USERNAME='<Enter email smtp username>'
 export EMAIL_SMTP_PASSWORD='<Enter email smtp password>'
 ```
 
-## Running the item finder
+## Running the item notifier
 ```
-python ebay_multilocation_item_finder/itemfinder.py
+python ebay_multilocation_item_notifier/itemfinder.py
 ```
 
 

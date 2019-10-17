@@ -1,4 +1,4 @@
-from ebay_multilocation_item_finder.utils import generate_item_filter_list
+from ebay_multilocation_item_notifier.utils import generate_item_filter_list
 
 
 def test_generate_item_filter_list_default():

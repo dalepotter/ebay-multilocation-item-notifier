@@ -48,7 +48,7 @@ def render_email_template(results):
     Returns:
         str -- Summary of results in HTML format.
     """
-    with open('ebay_multilocation_item_finder/templates/notification-email.html') as fp:
+    with open('ebay_multilocation_item_notifier/templates/notification-email.html') as fp:
         template = JinjaTemplate(fp.read())
 
     return template.render(results=results)

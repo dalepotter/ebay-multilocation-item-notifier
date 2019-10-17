@@ -3,7 +3,7 @@ import os
 import emails
 from ebaysdk.exception import ConnectionError
 from ebaysdk.finding import Connection
-from ebay_multilocation_item_finder.utils import generate_item_filter_list, render_email_template
+from ebay_multilocation_item_notifier.utils import generate_item_filter_list, render_email_template
 
 searches = [
     # (Search keyword string (str), [optional] custom item filters (list of dicts))
@@ -157,7 +157,7 @@ if __name__ == '__main__':
     html_summary = render_email_template(results_dict)
 
     message = emails.html(
-        subject='[ebay-multilocation-item-finder] Item summary',
+        subject='[ebay-multilocation-item-notifier] Item summary',
         html=html_summary,
         mail_from=(os.environ['EMAIL_SENDER_NAME'], os.environ['EMAIL_SENDER_ADDRESS'])
     )

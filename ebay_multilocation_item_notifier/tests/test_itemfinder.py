@@ -1,5 +1,5 @@
 import ebaysdk
-from ebay_multilocation_item_finder.itemfinder import get_results_dict
+from ebay_multilocation_item_notifier.itemfinder import get_results_dict
 
 
 def test_get_results_api_receives_expected_payload(mocker, mock_response_three_items):
