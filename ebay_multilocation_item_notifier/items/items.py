@@ -2,7 +2,7 @@ import os
 from ebay_multilocation_item_notifier.ebay_search_base import EbaySearchItemBase
 
 
-class EbayPlymouthToBristolSearch():
+class EbayPlymouthToBristolSearch(EbaySearchItemBase):
     """Base class, where the subclass represents one item search."""
     default_search_radius = 5
     search_filters = [
