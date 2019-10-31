@@ -1,6 +1,7 @@
 import datetime
 import pytest
 import ebaysdk
+from ebay_multilocation_item_notifier.ebay_search_base import EbaySearchItemBase
 
 
 MOCK_SEARCH_RESULT_THREE_ITEMS = {
@@ -178,6 +179,28 @@ MOCK_SEARCH_RESULT_THREE_ITEMS = {
 }
 
 
+class MockSearchItemBase(EbaySearchItemBase):
+    search_keyword = "search keyword 1"
+    search_filters = [
+        {'name': 'Condition',
+         'value': 'Used'},
+        {'name': 'ListingType',
+         'value': 'Auction'},
+        # {'name': 'MaxDistance',
+        #  'value': '5'},
+        {'name': 'LocalPickupOnly',
+         'value': True},
+        # Params for searching for sold items:
+        # {'name': 'SoldItemsOnly',
+        #  'value': True}
+    ]
+    search_locations = [
+        ['location 1', 'AB1 2CD', 20],
+        ['location 2', 'EF3 5GH'],
+        ['location 3', 'IJ6 7KL', 10]
+    ]
+
+
 def generate_mock_response(search_results):
     """Return a mock ebaysdk.response.Response object that can be used to patch the output of a `ebaysdk.finding.Connection.execute` object."""
 
@@ -205,3 +228,8 @@ def generate_mock_response(search_results):
 def mock_response_three_items():
     """Return dictionary representaion of a `ebaysdk.response.ResponseDataObject` search result containing 3 items."""
     return generate_mock_response(MOCK_SEARCH_RESULT_THREE_ITEMS)
+
+
+@pytest.fixture
+def mock_search():
+    return MockSearchItemBase()

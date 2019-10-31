@@ -1,27 +1,5 @@
 import ebaysdk
-from ebay_multilocation_item_notifier.ebay_search_base import EbaySearchItemBase
-
-
-class MockSearchItemBase(EbaySearchItemBase):
-    search_keyword = "search keyword 1"
-    search_filters = [
-        {'name': 'Condition',
-         'value': 'Used'},
-        {'name': 'ListingType',
-         'value': 'Auction'},
-        # {'name': 'MaxDistance',
-        #  'value': '5'},
-        {'name': 'LocalPickupOnly',
-         'value': True},
-        # Params for searching for sold items:
-        # {'name': 'SoldItemsOnly',
-        #  'value': True}
-    ]
-    search_locations = [
-        ['location 1', 'AB1 2CD', 20],
-        ['location 2', 'EF3 5GH'],
-        ['location 3', 'IJ6 7KL', 10]
-    ]
+from ebay_multilocation_item_notifier.tests.conftest import MockSearchItemBase
 
 
 class MockSearchItemBaseWithItemFilters(MockSearchItemBase):

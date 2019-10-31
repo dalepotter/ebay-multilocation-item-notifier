@@ -1,26 +1,25 @@
 import ebaysdk
+from ebay_multilocation_item_notifier.ebay_searches import EbaySearches
 from ebay_multilocation_item_notifier.itemfinder import get_results_dict
-from ebay_multilocation_item_notifier.tests.test_ebay_search_base import MockSearchItemBase
 
 
 def test_get_results_empty_input_returns_empty_dict(mocker, mock_response_three_items):
     """`get_results_dict` with no data must return an empty dictionary."""
     mocker.patch.object(ebaysdk.finding.Connection, 'execute')
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
+    mock_searches = EbaySearches()
 
-    result = get_results_dict([])
+    result = get_results_dict(mock_searches)
 
     assert isinstance(result, dict)
     assert result == {}
 
 
-def test_get_results_with_input_returns_nested_dict(mocker, mock_response_three_items):
+def test_get_results_with_input_returns_nested_dict(mocker, mock_response_three_items, mock_search):
     """`get_results_dict` with mocked data must return a nested dictionary with the input search keyword as a parent of the input locations."""
     mocker.patch.object(ebaysdk.finding.Connection, 'execute')
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
-    mock_searches = [
-        MockSearchItemBase()
-    ]
+    mock_searches = EbaySearches(mock_search)
 
     result = get_results_dict(mock_searches)
 
