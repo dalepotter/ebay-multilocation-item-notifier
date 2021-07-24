@@ -21,8 +21,8 @@ jobs:
         env:
           HOME_POSTCODE: ${{ secrets.HOME_POSTCODE }}
           OFFICE_POSTCODE: ${{ secrets.OFFICE_POSTCODE }}
-          run:
-            echo "Required envars set"
+        run:
+          echo "Required envars set"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
