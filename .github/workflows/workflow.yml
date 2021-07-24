@@ -17,12 +17,12 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set enviroment variables
-      shell: bash
-      env:
-        HOME_POSTCODE: ${{ secrets.HOME_POSTCODE }}
-        OFFICE_POSTCODE: ${{ secrets.OFFICE_POSTCODE }}
-        run:
-          echo "Required envars set"
+        shell: bash
+        env:
+          HOME_POSTCODE: ${{ secrets.HOME_POSTCODE }}
+          OFFICE_POSTCODE: ${{ secrets.OFFICE_POSTCODE }}
+          run:
+            echo "Required envars set"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
