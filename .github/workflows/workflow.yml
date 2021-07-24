@@ -11,6 +11,10 @@ jobs:
         python-version: ['3.6']
 
     steps:
+      - shell: bash
+        env:
+          HOME_POSTCODE: ${{ secrets.HOME_POSTCODE }}
+          OFFICE_POSTCODE: ${{ secrets.OFFICE_POSTCODE }}
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
