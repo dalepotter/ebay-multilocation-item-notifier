@@ -11,17 +11,18 @@ jobs:
         python-version: ['3.6']
 
     steps:
-      - shell: bash
-        env:
-          HOME_POSTCODE: ${{ secrets.HOME_POSTCODE }}
-          OFFICE_POSTCODE: ${{ secrets.OFFICE_POSTCODE }}
-        run:
-          echo "Required envars set"
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Set enviroment variables
+      shell: bash
+      env:
+        HOME_POSTCODE: ${{ secrets.HOME_POSTCODE }}
+        OFFICE_POSTCODE: ${{ secrets.OFFICE_POSTCODE }}
+        run:
+          echo "Required envars set"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
