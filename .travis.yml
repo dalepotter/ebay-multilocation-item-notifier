@@ -1,9 +1,0 @@
-language: python
-python:
-  - "3.6"
-install:
-  - pip install -r requirements_dev.txt
-script:  py.test
-after_success:
-  - test $TRAVIS_BRANCH = "master" &&
-    python ebay_multilocation_item_notifier/itemfinder.py
