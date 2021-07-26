@@ -39,5 +39,6 @@ jobs:
           EMAIL_SMTP_HOST: ${{ secrets.EMAIL_SMTP_HOST }}
           EMAIL_SMTP_PASSWORD: ${{ secrets.EMAIL_SMTP_PASSWORD }}
           EMAIL_SMTP_USERNAME: ${{ secrets.EMAIL_SMTP_USERNAME }}
+        if: github.ref == 'refs/heads/master'
         run: |
           python ebay_multilocation_item_notifier/itemfinder.py
