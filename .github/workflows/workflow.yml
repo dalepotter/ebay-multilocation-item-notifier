@@ -1,4 +1,4 @@
-name: Python package
+name: Run tests and (if on master) send email digest
 
 on:
   push:
