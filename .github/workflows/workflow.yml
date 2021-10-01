@@ -42,3 +42,4 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           python ebay_multilocation_item_notifier/itemfinder.py
+      - uses: gautamkrishnar/keepalive-workflow@master  # Push dummy commit after 50 days of inactivity (to keep Github Scheduled Action alive)
