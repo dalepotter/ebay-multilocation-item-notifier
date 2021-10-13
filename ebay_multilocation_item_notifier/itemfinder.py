@@ -64,7 +64,8 @@ search_locations = [
     ("M25 J25", "EN8 8EZ"),
     ("M25 J26", "EN9 3QY"),
 
-    ("Chingford station", "E4 6AL", 10)
+    ("Chingford station", "E4 6AL", 10),
+    ("Piccadilly Circus station", "W1J 9HS", 10)
 ]
 
 
