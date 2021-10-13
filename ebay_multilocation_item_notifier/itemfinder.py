@@ -7,8 +7,8 @@ from ebay_multilocation_item_notifier.utils import generate_item_filter_list, re
 
 searches = [
     # (Search keyword string (str), [optional] custom item filters (list of dicts))
-    ['dyson -(ball, dryer, parts, play, spares, toy)', [
-        {'name': 'MaxPrice', 'value': 80}
+    ['wallpaper (stripper, steamer)', [
+        {'name': 'MaxPrice', 'value': 10}
     ]],
     ['brompton'],
     ['folding (bike, bicycle) -(exercise, motor, quad, rack)'],
@@ -17,12 +17,6 @@ searches = [
     ]],
     ['sack truck -(antique, vintage, wooden)', [
         {'name': 'MaxPrice', 'value': 20}
-    ]],
-    ['radio (roberts, vintage) -(magazines, times, car, valve, valves)', [
-        {'name': 'MaxPrice', 'value': 10}
-    ]],
-    ['(headphones, earphones)', [
-        {'name': 'MaxPrice', 'value': 10}
     ]],
     ['(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent', [
         {'name': 'MaxPrice', 'value': 40}
