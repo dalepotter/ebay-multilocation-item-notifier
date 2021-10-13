@@ -10,8 +10,13 @@ searches = [
     ['wallpaper (stripper, steamer)', [
         {'name': 'MaxPrice', 'value': 10}
     ]],
-    ['brompton'],
-    ['folding (bike, bicycle) -(exercise, motor, quad, rack)'],
+    ['brompton', [
+        {'name': 'MaxPrice', 'value': 150}
+    ]],
+    ['raleigh cameo'],
+    ['folding (bike, bicycle) -(exercise, motor, quad, rack)', [
+        {'name': 'MaxPrice', 'value': 80}
+    ]],
     ['(bike, cycle) trailer', [
         {'name': 'MaxPrice', 'value': 25}
     ]],
