@@ -14,6 +14,9 @@ searches = [
         {'name': 'MaxPrice', 'value': 150}
     ]],
     ['raleigh cameo'],
+    ['uppababy vista', [
+        {'name': 'MaxDistance', 'value': '10'}
+    ]],
     ['folding (bike, bicycle) -(exercise, motor, quad, rack)', [
         {'name': 'MaxPrice', 'value': 80}
     ]],
