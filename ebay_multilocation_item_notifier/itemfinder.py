@@ -7,29 +7,7 @@ from ebay_multilocation_item_notifier.utils import generate_item_filter_list, re
 
 searches = [
     # (Search keyword string (str), [optional] custom item filters (list of dicts))
-    ['wallpaper (stripper, steamer)', [
-        {'name': 'MaxPrice', 'value': 10}
-    ]],
-    ['brompton', [
-        {'name': 'MaxPrice', 'value': 150}
-    ]],
-    ['raleigh cameo'],
-    ['folding (bike, bicycle) -(exercise, motor, quad, rack)', [
-        {'name': 'MaxPrice', 'value': 80}
-    ]],
     ['(uppababy, uppa baby, upper baby) vista'],
-    ['(bike, cycle) trailer', [
-        {'name': 'MaxPrice', 'value': 25}
-    ]],
-    ['sack truck -(antique, vintage, wooden)', [
-        {'name': 'MaxPrice', 'value': 20}
-    ]],
-    ['(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent', [
-        {'name': 'MaxPrice', 'value': 40}
-    ]],
-    ['(bike, bicycle) -(boys, childs, exercise, girls, journal, kids, magazine, motor, quad, rack)', [
-        {'name': 'MaxPrice', 'value': 15}
-    ]]
 ]
 
 search_locations = [
