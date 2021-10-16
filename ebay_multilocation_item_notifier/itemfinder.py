@@ -5,13 +5,13 @@ from ebay_multilocation_item_notifier.ebay_searches import EbaySearches
 from ebay_multilocation_item_notifier.utils import render_email_template
 
 items = EbaySearches(
-    items.DysonVaccumCleaner(),
+    items.WallpaperSteamer(),
+    items.UppababyVista(),
     items.Brompton(),
+    items.RaleighCameo(),
     items.FoldingBike(),
     items.BikeTrailer(),
     items.SackTruck(),
-    items.VintageRadio(),
-    items.Headphones(),
     items.BackpackingTent(),
     items.Bike()
 )
