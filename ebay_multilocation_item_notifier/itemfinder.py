@@ -17,7 +17,7 @@ searches = [
     ['folding (bike, bicycle) -(exercise, motor, quad, rack)', [
         {'name': 'MaxPrice', 'value': 80}
     ]],
-    ['uppababy vista'],
+    ['(uppababy, uppa baby, upper baby) vista'],
     ['(bike, cycle) trailer', [
         {'name': 'MaxPrice', 'value': 25}
     ]],
