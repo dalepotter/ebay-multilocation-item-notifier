@@ -42,4 +42,16 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           python ebay_multilocation_item_notifier/itemfinder.py
+      - name: Send digest email (uppababy vista)
+        env:
+          EMAIL_RECIPIENT_ADDRESS: ${{ secrets.EMAIL_RECIPIENT_ADDRESS }}
+          EMAIL_RECIPIENT_NAME: ${{ secrets.EMAIL_RECIPIENT_NAME }}
+          EMAIL_SENDER_ADDRESS: ${{ secrets.EMAIL_SENDER_ADDRESS }}
+          EMAIL_SENDER_NAME: ${{ secrets.EMAIL_SENDER_NAME }}
+          EMAIL_SMTP_HOST: ${{ secrets.EMAIL_SMTP_HOST }}
+          EMAIL_SMTP_PASSWORD: ${{ secrets.EMAIL_SMTP_PASSWORD }}
+          EMAIL_SMTP_USERNAME: ${{ secrets.EMAIL_SMTP_USERNAME }}
+        if: github.ref == 'refs/heads/master'
+        run: |
+          git fetch origin && git checkout uppababyvista-only && python ebay_multilocation_item_notifier/itemfinder.py
       - uses: gautamkrishnar/keepalive-workflow@master  # Push dummy commit after 50 days of inactivity (to keep Github Scheduled Action alive)
