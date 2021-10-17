@@ -23,8 +23,6 @@ def test_get_results_api_receives_expected_payload(mocker, mock_response_three_i
                 'itemFilter': [
                     {'name': 'MaxPrice', 'value': 25},
                     {'name': 'MaxDistance', 'value': '20'},  # Value for location 1
-                    {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'},
                     {'name': 'LocalPickupOnly', 'value': True}
                 ],
                 'buyerPostalCode': 'AB1 2CD',
@@ -35,9 +33,7 @@ def test_get_results_api_receives_expected_payload(mocker, mock_response_three_i
                 'keywords': 'search keyword 1',
                 'itemFilter': [
                     {'name': 'MaxPrice', 'value': 25},
-                    {'name': 'MaxDistance', 'value': '5'},  # No value set for location 2, so use default value
-                    {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'},
+                    {'name': 'MaxDistance', 'value': '10'},  # No value set for location 2, so use default value
                     {'name': 'LocalPickupOnly', 'value': True}
                 ],
                 'buyerPostalCode': 'EF3 5GH',
@@ -49,8 +45,6 @@ def test_get_results_api_receives_expected_payload(mocker, mock_response_three_i
                 'itemFilter': [
                     {'name': 'MaxPrice', 'value': 25},
                     {'name': 'MaxDistance', 'value': '10'},  # Value for location 3
-                    {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'},
                     {'name': 'LocalPickupOnly', 'value': True}
                 ],
                 'buyerPostalCode': 'IJ6 7KL',

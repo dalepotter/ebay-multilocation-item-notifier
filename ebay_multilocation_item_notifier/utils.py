@@ -2,12 +2,8 @@ from emails.template import JinjaTemplate
 
 
 DEFAULT_ITEM_FILTER_LIST = [
-    {'name': 'Condition',
-     'value': 'Used'},
-    {'name': 'ListingType',
-     'value': 'Auction'},
     {'name': 'MaxDistance',
-     'value': '5'},
+     'value': '10'},
     {'name': 'LocalPickupOnly',
      'value': True},
     # Params for searching for sold items:

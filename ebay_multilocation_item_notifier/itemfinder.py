@@ -53,7 +53,7 @@ search_locations = [
 ]
 
 
-def get_results_dict(search_keywords, search_locations, default_search_radius=5):
+def get_results_dict(search_keywords, search_locations, default_search_radius=10):
     """Return a nested dictionary containing results for the input search keyword and locations.
 
     Inputs:

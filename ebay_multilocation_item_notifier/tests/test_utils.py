@@ -6,9 +6,7 @@ def test_generate_item_filter_list_default():
     result = generate_item_filter_list()
 
     assert result == [
-        {'name': 'Condition', 'value': 'Used'},
-        {'name': 'ListingType', 'value': 'Auction'},
-        {'name': 'MaxDistance', 'value': '5'},
+        {'name': 'MaxDistance', 'value': '10'},
         {'name': 'LocalPickupOnly', 'value': True},
     ]
 
