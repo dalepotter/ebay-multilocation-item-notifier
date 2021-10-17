@@ -132,7 +132,7 @@ if __name__ == '__main__':
     html_summary = render_email_template(results_dict)
 
     message = emails.html(
-        subject='[ebay-multilocation-item-notifier] Item summary',
+        subject='[ebay-multilocation-item-notifier] Uppababy vista item summary',
         html=html_summary,
         mail_from=(os.environ['EMAIL_SENDER_NAME'], os.environ['EMAIL_SENDER_ADDRESS'])
     )
