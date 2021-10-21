@@ -29,6 +29,7 @@ def get_results_dict(searches):
     """
     results_dict = dict()
     for item in searches.search_list:
+        # Use item.results
         results_dict[item.search_keyword] = item.find_items()
     return results_dict
 

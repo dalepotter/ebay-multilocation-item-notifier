@@ -1,8 +1,10 @@
 import ebaysdk
-from ebay_multilocation_item_notifier.tests.conftest import MockSearchItemBase
+import pytest
+import ebay_multilocation_item_notifier.tests.conftest as conftest
+from ebay_multilocation_item_notifier.ebay_search_base import EbaySearchItemBase
 
 
-class MockSearchItemBaseWithItemFilters(MockSearchItemBase):
+class MockSearchItemBaseWithItemFilters(conftest.MockSearchItemBase):
     search_filters = [
         {'name': 'MaxPrice', 'value': 25},
         {'name': 'LocalPickupOnly', 'value': False}
@@ -12,7 +14,7 @@ class MockSearchItemBaseWithItemFilters(MockSearchItemBase):
 def test_find_items_returns_dict(mocker, mock_response_three_items):
     mocker.patch.object(ebaysdk.finding.Connection, 'execute')
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
-    search = MockSearchItemBase()
+    search = conftest.MockSearchItemBase()
 
     result = search.find_items()
 
@@ -23,7 +25,7 @@ def test_find_items_payload_default_item_filters(mocker, mock_response_three_ite
     """An item object with default item filters must generate the expected API payload."""
     mocker.patch.object(ebaysdk.finding.Connection, 'execute')
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
-    search = MockSearchItemBase()
+    search = conftest.MockSearchItemBase()
     expected_calls = [
         mocker.call(
             'findItemsAdvanced', {
@@ -120,3 +122,29 @@ def test_find_items_payload_with_custom_item_filters(mocker, mock_response_three
 
     assert ebaysdk.finding.Connection.execute.call_count == 3
     ebaysdk.finding.Connection.execute.assert_has_calls(expected_calls)
+
+@pytest.mark.parametrize('mock_cached_results', [
+    {},
+    {
+        'location 1': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS),
+        'location 2': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS),
+        'location 3': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS)
+    }
+])
+def test_results_no_cache_calls_find_items(mocker, mock_response_three_items, mock_cached_results):
+    """An item object with no cached results calls find_items."""
+    search = conftest.MockSearchItemBase()
+    search.cached_results = mock_cached_results
+    mocker.patch.object(EbaySearchItemBase, 'find_items')
+    EbaySearchItemBase.find_items.return_value = {
+        location[0]: mock_response_three_items for location in search.search_locations
+    }
+
+    result = search.results
+
+    assert EbaySearchItemBase.find_items.called is not bool(mock_cached_results)  # Method must be called when there is no cached data, and vice versa
+    assert result
+    assert result['location 1']
+    assert result['location 2']
+    assert result['location 3']
+    assert isinstance(result['location 1'], ebaysdk.response.Response)

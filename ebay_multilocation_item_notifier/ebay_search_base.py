@@ -6,6 +6,7 @@ from ebay_multilocation_item_notifier.utils import generate_item_filter_list
 
 class EbaySearchItemBase():
     """Base class, where the subclass represents one item search."""
+    cached_results = {}
     default_search_radius = 5
     search_filters = []
     search_keyword = ""
@@ -77,3 +78,15 @@ class EbaySearchItemBase():
 
     def generate_item_filter_list(self):
         pass
+
+    @property
+    def results(self):
+        """Return search results (either from cached data, or through calling the ebay API).
+
+        Returns:
+            dict -- Two dimensional dict containing item keywords (key) and dict of item location results.
+        """
+        if not self.cached_results:
+            self.cached_results = self.find_items()
+
+        return self.cached_results
