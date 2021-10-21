@@ -2,7 +2,6 @@ import os
 import emails
 import ebay_multilocation_item_notifier.items.items as items
 from ebay_multilocation_item_notifier.ebay_searches import EbaySearches
-from ebay_multilocation_item_notifier.utils import render_email_template
 
 items = EbaySearches(
     items.WallpaperSteamer(),
@@ -35,9 +34,7 @@ def get_results_dict(searches):
 
 
 if __name__ == '__main__':
-    results_dict = get_results_dict(items)
-
-    html_summary = render_email_template(results_dict)
+    html_summary = items.render_email_template()
 
     message = emails.html(
         subject='[ebay-multilocation-item-notifier] Item summary',

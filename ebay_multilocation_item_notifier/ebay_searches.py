@@ -1,3 +1,6 @@
+from emails.template import JinjaTemplate
+
+
 class EbaySearches():
     """Represents a container for items to be searched for."""
     search_list = []
@@ -14,4 +17,20 @@ class EbaySearches():
     def render_email_template(self):
         # Add filter_distant_results / filter_furthest_results / filter_remote_results
         # Will probably use filter/reduce functions
-        pass
+        """Return populated text that can be sent as an email summary of the item/location results.
+
+        Inputs:
+            results (dict) --  Two-dimensional dictionary containing search keywords (keys) and location search results (key, value pairs).
+
+        Returns:
+            str -- Summary of results in HTML format.
+        """
+        with open('ebay_multilocation_item_notifier/templates/notification-email.html') as fp:
+            template = JinjaTemplate(fp.read())
+
+        # TODO: Move collation of results to class property / or just loop over `self.search_list` in the template
+        results = {}
+        for search in self.search_list:
+            results[search.search_keyword] = search.results
+
+        return template.render(results=results)

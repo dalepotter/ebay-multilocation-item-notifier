@@ -12,6 +12,7 @@ class MockSearchItemBaseWithItemFilters(conftest.MockSearchItemBase):
 
 
 def test_find_items_returns_dict(mocker, mock_response_three_items):
+    # use fixture?
     mocker.patch.object(ebaysdk.finding.Connection, 'execute')
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
     search = conftest.MockSearchItemBase()
