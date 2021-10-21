@@ -202,7 +202,14 @@ class MockSearchItemBase(EbaySearchItemBase):
 
 
 def generate_mock_response(search_results):
-    """Return a mock ebaysdk.response.Response object that can be used to patch the output of a `ebaysdk.finding.Connection.execute` object."""
+    """Return a mock ebaysdk.response.Response object that can be used to patch the output of a `ebaysdk.finding.Connection.execute` object.
+
+    Input:
+        search_results (dict) -- Representing search results to be added to the mock response.
+
+    Returns:
+        ebaysdk.response.Response -- With input search results parsed within the object.
+    """
 
     class AttrDict(dict):
         def __init__(self, *args, **kwargs):
