@@ -1,7 +1,7 @@
 from emails.template import JinjaTemplate
 
 
-class EbaySearches():
+class KeywordSearchContainer():
     """Represents a container for items to be searched for."""
     search_list = []
 
@@ -9,7 +9,7 @@ class EbaySearches():
         """Bind individual search/es to this object.
 
         Inputs:
-            args (EbaySearchItemBase) -- Search object/s to be bound to this object.
+            args (KeywordSearch) -- Search object/s to be bound to this object.
         """
         for search_obj in args:
             self.search_list = self.search_list + [search_obj]

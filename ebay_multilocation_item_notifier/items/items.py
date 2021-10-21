@@ -1,8 +1,8 @@
 import os
-from ebay_multilocation_item_notifier.ebay_search_base import EbaySearchItemBase
+from ebay_multilocation_item_notifier.keyword_search import KeywordSearch
 
 
-class EbayPlymouthToBristolSearch(EbaySearchItemBase):
+class EbayPlymouthToBristolSearch(KeywordSearch):
     """Base class, where the subclass represents one item search."""
     default_search_radius = 5
     search_filters = [
@@ -65,7 +65,7 @@ class EbayPlymouthToBristolSearch(EbaySearchItemBase):
     ]
 
 
-class EbayBristolToChingfordSearch(EbaySearchItemBase):
+class EbayBristolToChingfordSearch(KeywordSearch):
     """Base class, where the subclass represents one item search."""
     default_search_radius = 5
     search_filters = [

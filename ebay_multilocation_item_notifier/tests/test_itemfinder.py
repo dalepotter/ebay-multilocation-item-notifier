@@ -1,5 +1,5 @@
 import ebaysdk
-from ebay_multilocation_item_notifier.ebay_searches import EbaySearches
+from ebay_multilocation_item_notifier.keyword_search_container import KeywordSearchContainer
 from ebay_multilocation_item_notifier.itemfinder import get_results_dict
 
 
@@ -7,21 +7,21 @@ def test_get_results_empty_input_returns_empty_dict(mocker, mock_response_three_
     """`get_results_dict` with no data must return an empty dictionary."""
     mocker.patch.object(ebaysdk.finding.Connection, 'execute')
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
-    mock_searches = EbaySearches()
+    mock_container = KeywordSearchContainer()
 
-    result = get_results_dict(mock_searches)
+    result = get_results_dict(mock_container)
 
     assert isinstance(result, dict)
     assert result == {}
 
 
-def test_get_results_with_input_returns_nested_dict(mocker, mock_response_three_items, mock_search):
+def test_get_results_with_input_returns_nested_dict(mocker, mock_response_three_items, mock_kw_search):
     """`get_results_dict` with mocked data must return a nested dictionary with the input search keyword as a parent of the input locations."""
     mocker.patch.object(ebaysdk.finding.Connection, 'execute')
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
-    mock_searches = EbaySearches(mock_search)
+    mock_container = KeywordSearchContainer(mock_kw_search)
 
-    result = get_results_dict(mock_searches)
+    result = get_results_dict(mock_container)
 
     assert len(result) == 1  # There is only one item in `mock_searches`
     assert 'search keyword 1' in result.keys()

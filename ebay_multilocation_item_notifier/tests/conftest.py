@@ -1,7 +1,7 @@
 import datetime
 import pytest
 import ebaysdk
-from ebay_multilocation_item_notifier.ebay_search_base import EbaySearchItemBase
+from ebay_multilocation_item_notifier.keyword_search import KeywordSearch
 
 
 MOCK_SEARCH_RESULT_THREE_ITEMS = {
@@ -179,7 +179,7 @@ MOCK_SEARCH_RESULT_THREE_ITEMS = {
 }
 
 
-class MockSearchItemBase(EbaySearchItemBase):
+class MockKeywordSearch(KeywordSearch):
     search_keyword = "search keyword 1"
     search_filters = [
         {'name': 'Condition',
@@ -238,16 +238,16 @@ def mock_response_three_items():
 
 
 @pytest.fixture
-def mock_search():
-    return MockSearchItemBase()
+def mock_kw_search():
+    return MockKeywordSearch()
 
 
 @pytest.fixture
-def mock_search_with_three_items_three_locations(mocker, mock_response_three_items):
+def mock_kw_search_with_three_items_three_locations(mocker, mock_response_three_items):
     mocker.patch.object(ebaysdk.finding.Connection, 'execute')
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
-    mock_search = MockSearchItemBase()
+    mock_kw_search = MockKeywordSearch()
 
-    mock_search.find_items()
+    mock_kw_search.find_items()
 
-    return mock_search
+    return mock_kw_search

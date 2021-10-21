@@ -4,7 +4,7 @@ from ebaysdk.finding import Connection
 from ebay_multilocation_item_notifier.utils import generate_item_filter_list
 
 
-class EbaySearchItemBase():
+class KeywordSearch():
     """Base class, where the subclass represents one item search."""
     cached_results = {}
     default_search_radius = 5

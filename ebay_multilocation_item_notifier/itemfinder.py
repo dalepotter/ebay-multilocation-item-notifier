@@ -1,9 +1,9 @@
 import os
 import emails
 import ebay_multilocation_item_notifier.items.items as items
-from ebay_multilocation_item_notifier.ebay_searches import EbaySearches
+from ebay_multilocation_item_notifier.keyword_search_container import KeywordSearchContainer
 
-items = EbaySearches(
+items = KeywordSearchContainer(
     items.WallpaperSteamer(),
     items.UppababyVista(),
     items.Brompton(),
@@ -16,18 +16,18 @@ items = EbaySearches(
 )
 
 
-def get_results_dict(searches):
-    """Return a nested dictionary containing results for the input search keyword and locations.
+def get_results_dict(container):
+    """Return a nested dictionary containing results for the input search keywords and locations.
 
     Inputs:
-        searches (EbaySearches) -- Object containing eBay searches.
+        container (KeywordSearchContainer) -- Object containing eBay keyword searches.
 
     Returns:
         dict (of dicts) -- A two-dimensional dictionary containing search keywords (keys) and location search results (key, value pairs)
                            An example ebaysdk.response.ResponseDataObject (representing an item search result) can be found in tests/test_itemfinder.py
     """
     results_dict = dict()
-    for item in searches.search_list:
+    for item in container.search_list:
         # Use item.results
         results_dict[item.search_keyword] = item.find_items()
     return results_dict
