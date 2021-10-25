@@ -5,10 +5,10 @@ from ebay_multilocation_item_notifier.keyword_search_container import KeywordSea
 
 items = KeywordSearchContainer(
     items.WallpaperSteamer(),
-    items.UppababyVista(),
     items.Brompton(),
     items.RaleighCameo(),
     items.FoldingBike(),
+    items.UppababyVista(),
     items.BikeTrailer(),
     items.SackTruck(),
     items.BackpackingTent(),

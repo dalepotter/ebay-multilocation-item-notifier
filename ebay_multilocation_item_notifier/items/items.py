@@ -132,10 +132,6 @@ class WallpaperSteamer(EbayBristolToChingfordSearch):
     ]
 
 
-class UppababyVista(EbayBristolToChingfordSearch):
-    search_keyword = 'uppababy vista'
-
-
 class Brompton(EbayBristolToChingfordSearch):
     search_keyword = "brompton"
     search_filters = [
@@ -152,6 +148,10 @@ class FoldingBike(EbayBristolToChingfordSearch):
     search_filters = [
         {'name': 'MaxPrice', 'value': 80}
     ]
+
+
+class UppababyVista(EbayBristolToChingfordSearch):
+    search_keyword = '(uppababy, uppa baby, upper baby) vista'
 
 
 class BikeTrailer(EbayBristolToChingfordSearch):
