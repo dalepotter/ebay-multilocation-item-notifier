@@ -243,7 +243,7 @@ def mock_kw_search():
 
 
 @pytest.fixture
-def mock_kw_search_with_three_items_three_locations(mocker, mock_response_three_items):
+def mock_kw_search_with_three_locations_three_items(mocker, mock_response_three_items):
     mocker.patch.object(ebaysdk.finding.Connection, 'execute')
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
     mock_kw_search = MockKeywordSearch()
