@@ -13,7 +13,7 @@ class KeywordSearch():
     search_locations = []
 
     def find_items(self):
-        """Return a dictionary of itmes for the search keyword and search locations.
+        """Return a dictionary of items for the search keyword and search locations.
 
         Returns:
             dict -- A two-dimensional dictionary containing search locations (keys) and results (value)
