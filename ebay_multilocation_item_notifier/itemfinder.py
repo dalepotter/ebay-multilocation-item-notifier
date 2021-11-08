@@ -15,24 +15,6 @@ items = KeywordSearchContainer(
     items.Bike()
 )
 
-
-def get_results_dict(container):
-    """Return a nested dictionary containing results for the input search keywords and locations.
-
-    Inputs:
-        container (KeywordSearchContainer) -- Object containing eBay keyword searches.
-
-    Returns:
-        dict (of dicts) -- A two-dimensional dictionary containing search keywords (keys) and location search results (key, value pairs)
-                           An example ebaysdk.response.ResponseDataObject (representing an item search result) can be found in tests/test_itemfinder.py
-    """
-    results_dict = dict()
-    for item in container.search_list:
-        # Use item.results
-        results_dict[item.search_keyword] = item.find_items()
-    return results_dict
-
-
 if __name__ == '__main__':
     html_summary = items.render_email_template()
 
