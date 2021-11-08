@@ -4,7 +4,7 @@ import ebay_multilocation_item_notifier.tests.conftest as conftest
 from ebay_multilocation_item_notifier.keyword_search import KeywordSearch
 
 
-class MockKeywordSearchBaseWithItemFilters(conftest.MockKeywordSearch):
+class MockKeywordSearchBaseWithCustomItemFilters(conftest.MockKeywordSearch):
     search_filters = [
         {'name': 'MaxPrice', 'value': 25},
         {'name': 'LocalPickupOnly', 'value': False}
@@ -76,7 +76,7 @@ def test_find_items_payload_with_custom_item_filters(mocker, mock_response_three
     """An item object with custom item filters must generate the expected API payload."""
     mocker.patch.object(ebaysdk.finding.Connection, 'execute')
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
-    kw_search = MockKeywordSearchBaseWithItemFilters()
+    kw_search = MockKeywordSearchBaseWithCustomItemFilters()
     expected_calls = [
         mocker.call(
             'findItemsAdvanced', {

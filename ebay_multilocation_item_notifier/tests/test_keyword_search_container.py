@@ -5,7 +5,7 @@ from ebay_multilocation_item_notifier.keyword_search_container import KeywordSea
 
 
 @pytest.mark.parametrize("number_of_mock_searches", [0, 1, 10, 5])  # Unordered to test a new object overwrites existing searches
-def test_search_added_to_list(mock_kw_search, number_of_mock_searches):
+def test_input_searches_added_to_list(mock_kw_search, number_of_mock_searches):
     list_of_mock_searches = [mock_kw_search] * number_of_mock_searches
 
     mock_container = KeywordSearchContainer(*list_of_mock_searches)
