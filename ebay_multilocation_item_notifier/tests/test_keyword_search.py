@@ -1,32 +1,16 @@
 import ebaysdk
 import pytest
 import ebay_multilocation_item_notifier.tests.conftest as conftest
-from ebay_multilocation_item_notifier.keyword_search import KeywordSearch
 
 
-class MockKeywordSearchBaseWithCustomItemFilters(conftest.MockKeywordSearch):
-    search_filters = [
-        {'name': 'MaxPrice', 'value': 25},
-        {'name': 'LocalPickupOnly', 'value': False}
-    ]
-
-
-def test_find_items_returns_dict(mocker, mock_response_three_items):
-    # use fixture?
-    mocker.patch.object(ebaysdk.finding.Connection, 'execute')
-    ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
-    kw_search = conftest.MockKeywordSearch()
-
-    result = kw_search.find_items()
+def test_find_items_returns_dict(mock_kw_search):
+    result = mock_kw_search.find_items()
 
     assert len(result) == 3
 
 
-def test_find_items_payload_default_item_filters(mocker, mock_response_three_items):
+def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
     """An item object with default item filters must generate the expected API payload."""
-    mocker.patch.object(ebaysdk.finding.Connection, 'execute')
-    ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
-    kw_search = conftest.MockKeywordSearch()
     expected_calls = [
         mocker.call(
             'findItemsAdvanced', {
@@ -66,17 +50,18 @@ def test_find_items_payload_default_item_filters(mocker, mock_response_three_ite
         )
     ]
 
-    kw_search.find_items()
+    mock_kw_search.find_items()
 
     assert ebaysdk.finding.Connection.execute.call_count == 3
     ebaysdk.finding.Connection.execute.assert_has_calls(expected_calls)
 
 
-def test_find_items_payload_with_custom_item_filters(mocker, mock_response_three_items):
+def test_find_items_payload_with_custom_item_filters(mocker, mock_kw_search):
     """An item object with custom item filters must generate the expected API payload."""
-    mocker.patch.object(ebaysdk.finding.Connection, 'execute')
-    ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
-    kw_search = MockKeywordSearchBaseWithCustomItemFilters()
+    mock_kw_search.search_filters = [
+        {'name': 'MaxPrice', 'value': 25},
+        {'name': 'LocalPickupOnly', 'value': False}
+    ]
     expected_calls = [
         mocker.call(
             'findItemsAdvanced', {
@@ -119,7 +104,7 @@ def test_find_items_payload_with_custom_item_filters(mocker, mock_response_three
         )
     ]
 
-    kw_search.find_items()
+    mock_kw_search.find_items()
 
     assert ebaysdk.finding.Connection.execute.call_count == 3
     ebaysdk.finding.Connection.execute.assert_has_calls(expected_calls)
@@ -132,18 +117,14 @@ def test_find_items_payload_with_custom_item_filters(mocker, mock_response_three
         'location 3': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS).reply.searchResult
     }
 ])
-def test_results_no_cache_calls_find_items(mocker, mock_response_three_items, mock_cached_results):
+def test_results_no_cache_calls_find_items(mocker, mock_kw_search, mock_cached_results):
     """An item object with no cached results calls find_items."""
-    search = conftest.MockKeywordSearch()
-    search.cached_results = mock_cached_results
-    mocker.patch.object(KeywordSearch, 'find_items')
-    KeywordSearch.find_items.return_value = {
-        location[0]: mock_response_three_items for location in search.search_locations
-    }
+    mock_kw_search.cached_results = mock_cached_results
+    spy = mocker.spy(conftest.MockKeywordSearch, 'find_items')
 
-    result = search.results
+    result = mock_kw_search.results
 
-    assert KeywordSearch.find_items.called is not bool(mock_cached_results)  # Method must be called when there is no cached data, and vice versa
+    assert spy.called is not bool(mock_cached_results)  # Method must be called when there is no cached data, and vice versa
     assert result
     assert result['location 1']
     assert result['location 2']

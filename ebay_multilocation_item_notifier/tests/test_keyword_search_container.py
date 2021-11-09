@@ -13,10 +13,10 @@ def test_input_searches_added_to_list(mock_kw_search, number_of_mock_searches):
     assert len(mock_container.search_list) == number_of_mock_searches
 
 
-def test_output_renders_from_template(mock_kw_search_with_three_locations_three_items):
+def test_output_renders_from_template(mock_kw_search):
     """Ensure that the template is rendering content from the expected template."""
     mock_container = KeywordSearchContainer(
-        mock_kw_search_with_three_locations_three_items
+        mock_kw_search
     )
 
     result = mock_container.render_email_template()
@@ -26,10 +26,10 @@ def test_output_renders_from_template(mock_kw_search_with_three_locations_three_
     assert soup.find('p').text == "The following items were found for the specified locations listed:"
 
 
-def test_single_location_results_in_template(mock_kw_search_with_three_locations_three_items):
+def test_single_location_results_in_template(mock_kw_search):
     """A container with results for 3 items & 3 locations must render into the expected template format."""
     mock_container = KeywordSearchContainer(
-        mock_kw_search_with_three_locations_three_items
+        mock_kw_search
     )
 
     result = mock_container.render_email_template()
