@@ -129,4 +129,6 @@ def test_results_no_cache_calls_find_items(mocker, mock_kw_search, mock_cached_r
     assert result['location 1']
     assert result['location 2']
     assert result['location 3']
-    assert isinstance(result['location 1'], ebaysdk.response.ResponseDataObject)
+    assert all(
+        [isinstance(location_result, ebaysdk.response.ResponseDataObject) for location_result in result.values()]
+    )
