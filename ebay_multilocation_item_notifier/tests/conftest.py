@@ -233,7 +233,7 @@ def generate_mock_response(search_results):
 
 @pytest.fixture
 def mock_response_three_items():
-    """Return dictionary representaion of a `ebaysdk.response.ResponseDataObject` search result containing 3 items."""
+    """Return dictionary representaion of a `ebaysdk.response.Response` search result containing 3 items."""
     return generate_mock_response(MOCK_SEARCH_RESULT_THREE_ITEMS)
 
 

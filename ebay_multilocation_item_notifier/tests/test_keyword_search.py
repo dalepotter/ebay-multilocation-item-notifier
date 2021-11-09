@@ -127,9 +127,9 @@ def test_find_items_payload_with_custom_item_filters(mocker, mock_response_three
 @pytest.mark.parametrize('mock_cached_results', [
     {},
     {
-        'location 1': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS),
-        'location 2': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS),
-        'location 3': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS)
+        'location 1': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS).reply.searchResult,
+        'location 2': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS).reply.searchResult,
+        'location 3': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS).reply.searchResult
     }
 ])
 def test_results_no_cache_calls_find_items(mocker, mock_response_three_items, mock_cached_results):
@@ -148,4 +148,4 @@ def test_results_no_cache_calls_find_items(mocker, mock_response_three_items, mo
     assert result['location 1']
     assert result['location 2']
     assert result['location 3']
-    assert isinstance(result['location 1'], ebaysdk.response.Response)
+    assert isinstance(result['location 1'], ebaysdk.response.ResponseDataObject)
