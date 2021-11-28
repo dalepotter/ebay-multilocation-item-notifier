@@ -15,19 +15,37 @@ items = KeywordSearchContainer(
     items.Bike()
 )
 
-if __name__ == '__main__':
-    html_summary = items.render_email_template()
+
+def main(keyword_search_container):
+    """Execute keyword searches and send a notification email.
+
+    Input:
+        keyword_search_container (KeywordSearchContainer) -- Containing keyword searches to be executed.
+
+    Raises:
+        AssertionError -- When the email did not report as having sent correctly.
+    """
+    html_summary = keyword_search_container.render_email_template()
 
     message = emails.html(
         subject='[ebay-multilocation-item-notifier] Item summary',
         html=html_summary,
-        mail_from=(os.environ['EMAIL_SENDER_NAME'], os.environ['EMAIL_SENDER_ADDRESS'])
+        mail_from=(
+            os.environ['EMAIL_SENDER_NAME'],
+            os.environ['EMAIL_SENDER_ADDRESS']
+        )
     )
-    req = message.send(to=(os.environ['EMAIL_RECIPIENT_NAME'], os.environ['EMAIL_RECIPIENT_ADDRESS']),
-                       smtp={'host': os.environ['EMAIL_SMTP_HOST'],
-                             'port': 465,
-                             'ssl': True,
-                             'user': os.environ['EMAIL_SMTP_USERNAME'],
-                             'password': os.environ['EMAIL_SMTP_PASSWORD']}
-                       )
+    req = message.send(
+        to=(os.environ['EMAIL_RECIPIENT_NAME'], os.environ['EMAIL_RECIPIENT_ADDRESS']),
+        smtp={
+            'host': os.environ['EMAIL_SMTP_HOST'],
+            'port': 465,
+            'ssl': True,
+            'user': os.environ['EMAIL_SMTP_USERNAME'],
+            'password': os.environ['EMAIL_SMTP_PASSWORD']
+        }
+    )
     assert req.status_code == 250
+
+if __name__ == '__main__':
+    main(items)
