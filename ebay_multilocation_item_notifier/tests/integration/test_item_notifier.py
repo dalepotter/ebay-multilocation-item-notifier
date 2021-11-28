@@ -49,6 +49,5 @@ def test_main(capsys, mocker, caplog):
     )  # There must be at least 1 result for each search location
     print(type(email_html_call))
     print(email_html_call)
-    assert False
     assert email_html_call['subject'] == '[ebay-multilocation-item-notifier] Item summary'
     assert email_html_call['html']  # The message string must not be empty
