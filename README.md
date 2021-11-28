@@ -47,7 +47,10 @@ Unit tests can be run using Pytest:
 # Install dev requirements
 pip install -r requirements_dev.txt
 
-# Run the tests
+# Run the tests (that don't use the real eBay API)
+pytest -m 'not uses_ebay_api'
+
+# Run all the tests (including those that use the real eBay API)
 pytest
 ```
 
