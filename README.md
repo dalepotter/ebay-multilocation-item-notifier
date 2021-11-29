@@ -7,7 +7,7 @@ Search keywords and location postcodes are definted within `ebay_multilocation_i
 
 ## Set-up
 
-This is built using python 3.6.
+This is built using python 3.8.
 
 ```
 # Clone the repository
