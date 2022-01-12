@@ -4,6 +4,8 @@ import ebay_multilocation_item_notifier.items.items as items
 from ebay_multilocation_item_notifier.keyword_search_container import KeywordSearchContainer
 
 items = KeywordSearchContainer(
+    items.NailPuller(),
+    items.Morgedal(),
     items.WallpaperSteamer(),
     items.Brompton(),
     items.RaleighCameo(),
@@ -12,7 +14,6 @@ items = KeywordSearchContainer(
     items.BikeTrailer(),
     items.SackTruck(),
     items.BackpackingTent(),
-    items.Bike()
 )
 
 

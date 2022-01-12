@@ -125,6 +125,17 @@ class EbayBristolToChingfordSearch(KeywordSearch):
     ]
 
 
+class NailPuller(EbayBristolToChingfordSearch):
+    search_keyword = 'nail puller -crow'
+
+
+class Morgedal(EbayBristolToChingfordSearch):
+    search_keyword = 'morgedal'
+    search_filters = [
+        {'name': 'MaxPrice', 'value': 50}
+    ]
+
+
 class WallpaperSteamer(EbayBristolToChingfordSearch):
     search_keyword = 'wallpaper (stripper, steamer)'
     search_filters = [
