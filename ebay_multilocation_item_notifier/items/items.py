@@ -65,7 +65,7 @@ class EbayPlymouthToBristolSearch(KeywordSearch):
     ]
 
 
-class EbayBristolToChingfordSearch(KeywordSearch):
+class EbayBristolToExeterSearch(KeywordSearch):
     """Base class, where the subclass represents one item search."""
     default_search_radius = 5
     search_filters = [
@@ -125,68 +125,107 @@ class EbayBristolToChingfordSearch(KeywordSearch):
     ]
 
 
-class NailPuller(EbayBristolToChingfordSearch):
+class EbayBristolToExeterSearch(KeywordSearch):
+    """Base class, where the subclass represents one item search."""
+    default_search_radius = 5
+    search_filters = [
+        {'name': 'Condition',
+         'value': 'Used'},
+        {'name': 'ListingType',
+         'value': 'Auction'},
+        # {'name': 'MaxDistance',
+        #  'value': '5'},
+        {'name': 'LocalPickupOnly',
+         'value': True},
+        # Params for searching for sold items:
+        # {'name': 'SoldItemsOnly',
+        #  'value': True}
+    ]
+    search_keyword = ""
+    search_locations = [
+        #  (Location name, UK location postcode, search radius in miles (optional))
+        ('Home', os.environ['HOME_POSTCODE'], 10),
+
+        ("M5 J18", "BS11 8DL"),
+        ("M5 J19", "BS20 7XG"),
+        ("M5 J20", "BS21 6XU"),
+        ("M5 J21", "BS22 7SQ"),
+        ("M5 J22", "TA9 4HF"),
+        ("M5 J23", "TA7 8AF"),
+        ("M5 J24", "TA7 0DU"),
+        ("M5 J25", "TA1 2PG"),
+        ("M5 J26", "TA21 9PL"),
+        ("M5 J27", "EX16 7HD"),
+        ("M5 J28", "EX15 1NS"),
+        ("M5 J29", "EX5 2AQ"),
+        ("M5 J30", "EX2 7JJ"),
+
+        ("Exeter St Davids station", "EX4 4NT", 20)
+    ]
+
+
+class NailPuller(EbayBristolToExeterSearch):
     search_keyword = 'nail puller -crow'
 
 
-class Morgedal(EbayBristolToChingfordSearch):
+class Morgedal(EbayBristolToExeterSearch):
     search_keyword = 'morgedal'
     search_filters = [
         {'name': 'MaxPrice', 'value': 50}
     ]
 
 
-class WallpaperSteamer(EbayBristolToChingfordSearch):
+class WallpaperSteamer(EbayBristolToExeterSearch):
     search_keyword = 'wallpaper (stripper, steamer)'
     search_filters = [
         {'name': 'MaxPrice', 'value': 10}
     ]
 
 
-class Brompton(EbayBristolToChingfordSearch):
+class Brompton(EbayBristolToExeterSearch):
     search_keyword = "brompton"
     search_filters = [
         {'name': 'MaxPrice', 'value': 150}
     ]
 
 
-class RaleighCameo(EbayBristolToChingfordSearch):
+class RaleighCameo(EbayBristolToExeterSearch):
     search_keyword = 'raleigh cameo'
 
 
-class FoldingBike(EbayBristolToChingfordSearch):
+class FoldingBike(EbayBristolToExeterSearch):
     search_keyword = "folding (bike, bicycle) -(exercise, motor, quad, rack)"
     search_filters = [
         {'name': 'MaxPrice', 'value': 80}
     ]
 
 
-class UppababyVista(EbayBristolToChingfordSearch):
+class UppababyVista(EbayBristolToExeterSearch):
     search_keyword = '(uppababy, uppa baby, upper baby) vista'
 
 
-class BikeTrailer(EbayBristolToChingfordSearch):
+class BikeTrailer(EbayBristolToExeterSearch):
     search_keyword = "(bike, cycle) trailer"
     search_filters = [
         {'name': 'MaxPrice', 'value': 25}
     ]
 
 
-class SackTruck(EbayBristolToChingfordSearch):
+class SackTruck(EbayBristolToExeterSearch):
     search_keyword = "sack truck -(antique, vintage, wooden)"
     search_filters = [
         {'name': 'MaxPrice', 'value': 20}
     ]
 
 
-class BackpackingTent(EbayBristolToChingfordSearch):
+class BackpackingTent(EbayBristolToExeterSearch):
     search_keyword = "(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent"
     search_filters = [
         {'name': 'MaxPrice', 'value': 40}
     ]
 
 
-class Bike(EbayBristolToChingfordSearch):
+class Bike(EbayBristolToExeterSearch):
     search_keyword = "(bike, bicycle) -(boys, childs, exercise, girls, journal, kids, magazine, motor, quad, rack)"
     search_filters = [
         {'name': 'MaxPrice', 'value': 15}
