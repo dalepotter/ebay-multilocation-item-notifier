@@ -65,7 +65,7 @@ class EbayPlymouthToBristolSearch(KeywordSearch):
     ]
 
 
-class EbayBristolToExeterSearch(KeywordSearch):
+class EbayBristolToChingfordSearch(KeywordSearch):
     """Base class, where the subclass represents one item search."""
     default_search_radius = 5
     search_filters = [
