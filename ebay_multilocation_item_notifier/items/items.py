@@ -2,7 +2,7 @@ import os
 from ebay_multilocation_item_notifier.keyword_search import KeywordSearch
 
 
-class EbayPlymouthToBristolSearch(KeywordSearch):
+class BasicKeywordSearch(KeywordSearch):
     """Base class, where the subclass represents one item search."""
     default_search_radius = 5
     search_filters = [
@@ -19,6 +19,9 @@ class EbayPlymouthToBristolSearch(KeywordSearch):
         #  'value': True}
     ]
     search_keyword = ""
+
+
+class EbayPlymouthToBristolSearch(BasicKeywordSearch):
     search_locations = [
         #  (Location name, UK location postcode, search radius in miles (optional))
         ('Saltash', 'PL12 4EB'),
@@ -65,23 +68,7 @@ class EbayPlymouthToBristolSearch(KeywordSearch):
     ]
 
 
-class EbayBristolToChingfordSearch(KeywordSearch):
-    """Base class, where the subclass represents one item search."""
-    default_search_radius = 5
-    search_filters = [
-        {'name': 'Condition',
-         'value': 'Used'},
-        {'name': 'ListingType',
-         'value': 'Auction'},
-        # {'name': 'MaxDistance',
-        #  'value': '5'},
-        {'name': 'LocalPickupOnly',
-         'value': True},
-        # Params for searching for sold items:
-        # {'name': 'SoldItemsOnly',
-        #  'value': True}
-    ]
-    search_keyword = ""
+class EbayBristolToChingfordSearch(BasicKeywordSearch):
     search_locations = [
         #  (Location name, UK location postcode, search radius in miles (optional))
         ('Home', os.environ['HOME_POSTCODE'], 10),
@@ -125,23 +112,7 @@ class EbayBristolToChingfordSearch(KeywordSearch):
     ]
 
 
-class EbayBristolToExeterSearch(KeywordSearch):
-    """Base class, where the subclass represents one item search."""
-    default_search_radius = 5
-    search_filters = [
-        {'name': 'Condition',
-         'value': 'Used'},
-        {'name': 'ListingType',
-         'value': 'Auction'},
-        # {'name': 'MaxDistance',
-        #  'value': '5'},
-        {'name': 'LocalPickupOnly',
-         'value': True},
-        # Params for searching for sold items:
-        # {'name': 'SoldItemsOnly',
-        #  'value': True}
-    ]
-    search_keyword = ""
+class EbayBristolToExeterSearch(BasicKeywordSearch):
     search_locations = [
         #  (Location name, UK location postcode, search radius in miles (optional))
         ('Home', os.environ['HOME_POSTCODE'], 10),
