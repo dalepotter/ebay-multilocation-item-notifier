@@ -4,6 +4,7 @@ import ebay_multilocation_item_notifier.tests.conftest as conftest
 
 
 def test_find_items_returns_dict(mock_kw_search):
+    """The `KeywordSearch.find_items` method must return the expected number of items."""
     result = mock_kw_search.find_items()
 
     assert len(result) == 3

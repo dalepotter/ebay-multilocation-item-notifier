@@ -6,6 +6,7 @@ from ebay_multilocation_item_notifier.keyword_search_container import KeywordSea
 
 @pytest.mark.parametrize("number_of_mock_searches", [0, 1, 10, 5])  # Unordered to test a new object overwrites existing searches
 def test_input_searches_added_to_list(mock_kw_search, number_of_mock_searches):
+    """`KeywordSearch` objects must be bound to the container's `search_list` property."""
     list_of_mock_searches = [mock_kw_search] * number_of_mock_searches
 
     mock_container = KeywordSearchContainer(*list_of_mock_searches)
@@ -14,6 +15,7 @@ def test_input_searches_added_to_list(mock_kw_search, number_of_mock_searches):
 
 @pytest.fixture
 def email_content_bs4_soup(mock_kw_search):
+    """Returns email body content as a `BeautifulSoup` object."""
     mock_container = KeywordSearchContainer(
         mock_kw_search
     )
