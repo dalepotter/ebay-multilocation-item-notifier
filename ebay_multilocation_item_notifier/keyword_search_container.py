@@ -19,9 +19,6 @@ class KeywordSearchContainer():
         # Will probably use filter/reduce functions
         """Return populated text that can be sent as an email summary of the item/location results.
 
-        Inputs:
-            results (dict) --  Two-dimensional dictionary containing search keywords (keys) and location search results (key, value pairs).
-
         Returns:
             str -- Summary of results in HTML format.
         """
