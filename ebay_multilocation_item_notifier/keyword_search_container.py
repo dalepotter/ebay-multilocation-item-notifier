@@ -14,6 +14,19 @@ class KeywordSearchContainer():
         for search_obj in args:
             self.search_list = self.search_list + [search_obj]
 
+    @property
+    def aggregate_search_results(self):
+        """Return search results for all items as a single dict.
+
+        Returns:
+            dict -- Containing search keywords (keys) and a dict containing locations and items (values)
+        """
+        results = {}
+        for search in self.search_list:
+            results[search.search_keyword] = search.results
+
+        return results
+
     def render_email_template(self):
         # Add filter_distant_results / filter_furthest_results / filter_remote_results
         # Will probably use filter/reduce functions
@@ -25,9 +38,4 @@ class KeywordSearchContainer():
         with open('ebay_multilocation_item_notifier/templates/notification-email.html') as fp:
             template = JinjaTemplate(fp.read())
 
-        # TODO: Move collation of results to class property / or just loop over `self.search_list` in the template
-        results = {}
-        for search in self.search_list:
-            results[search.search_keyword] = search.results
-
-        return template.render(results=results)
+        return template.render(results=self.aggregate_search_results)
