@@ -55,13 +55,11 @@ pytest
 ```
 
 
-## Future work
+## Roadmap
 
-### Iteration 2:
-Add distance from station to seller postcode after the item title - approaches here: https://stackoverflow.com/questions/44176381/calculate-road-travel-distance-between-postcodes-zipcodes-python
-
-### Iteration 3:
-Show new items only - implies storing item nos parsed
-
-### Iteration 4:
-Remove duplicate locations, only showing the item associated with the closest station.
+- [x] Query eBay API for defined keywords at defined location postcodes
+- [x] Send notification email daily
+- [ ] Add support for removing duplicate items
+- [ ] Add distance from station to seller postcode (displayed in email after item title) - [approaches here](https://stackoverflow.com/questions/44176381/calculate-road-travel-distance-between-postcodes-zipcodes-python)
+- [ ] Display only new items in email - implies storing item numbers seen
+- [ ] Display location in email where a duplicate email is closest to
