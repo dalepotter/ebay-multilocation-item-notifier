@@ -4,6 +4,10 @@ import ebaysdk
 from ebay_multilocation_item_notifier.keyword_search import KeywordSearch
 
 
+MOCK_SEARCH_RESULT_ZERO_ITEMS = {
+  '_count': '0'
+}
+
 MOCK_SEARCH_RESULT_THREE_ITEMS = {
   'item': [
       {

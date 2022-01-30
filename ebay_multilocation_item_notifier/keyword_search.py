@@ -11,6 +11,7 @@ class KeywordSearch():
     search_filters = []
     search_keyword = ""
     search_locations = []
+    remove_duplicates = False  # If True, only the first item seen will be returned. This will NOT necessarily be at the closest location.
 
     def find_items(self):
         """Return a dictionary of items for the search keyword and search locations.
@@ -89,4 +90,19 @@ class KeywordSearch():
         if not self.cached_results:
             self.cached_results = self.find_items()
 
-        return self.cached_results
+        # Set default output
+        output = self.cached_results
+
+        if self.remove_duplicates:
+            seen_item_ids = []
+            for location, loc_results in output.items():
+                try:
+                    output[location].item = [
+                        itm for itm in output[location].item if itm.itemId not in seen_item_ids
+                    ]
+                    seen_item_ids += [item.itemId for item in loc_results.item]
+                except AttributeError:
+                    # output[location].item not present (indicating zero results for this location)
+                    pass
+
+        return output

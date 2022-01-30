@@ -133,3 +133,18 @@ def test_results_no_cache_calls_find_items(mocker, mock_kw_search, mock_cached_r
     assert all(
         [isinstance(location_result, ebaysdk.response.ResponseDataObject) for location_result in result.values()]
     )
+
+def test_results_removes_duplicates_items_found(mock_kw_search):
+    """Duplicate item results must be removed when present in results at muliple locations."""
+    mock_kw_search.remove_duplicates = True
+    mock_kw_search.cached_results = {
+        'location 1': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_ZERO_ITEMS).reply.searchResult,
+        'location 2': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS).reply.searchResult,
+        'location 3': conftest.generate_mock_response(conftest.MOCK_SEARCH_RESULT_THREE_ITEMS).reply.searchResult
+    }
+
+    result = mock_kw_search.results
+
+    assert len(getattr(result['location 1'], 'item', list())) == 0  # location 3 was mocked to contain zero items
+    assert len(getattr(result['location 2'], 'item', list())) == 3
+    assert len(getattr(result['location 3'], 'item', list())) == 0  # location 3 was mocked to contain same items as location 2, so remove all
