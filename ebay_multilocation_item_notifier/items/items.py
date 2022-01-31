@@ -5,6 +5,7 @@ from ebay_multilocation_item_notifier.keyword_search import KeywordSearch
 class BasicKeywordSearch(KeywordSearch):
     """Base class, where the subclass represents one item search."""
     default_search_radius = 5
+    remove_duplicates = True
     search_filters = [
         {'name': 'Condition',
          'value': 'Used'},
