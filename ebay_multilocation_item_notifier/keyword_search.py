@@ -66,7 +66,7 @@ class KeywordSearch():
                 print(e)
                 print(e.response.dict())
 
-            print("Search keyword: {} - search_location: {} - Results {}".format(
+            print("Search keyword: {} - search_location: {} - Results for this location: {}".format(
                 self.search_keyword,
                 search_location,
                 response.reply.searchResult._count

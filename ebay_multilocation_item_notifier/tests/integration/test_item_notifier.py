@@ -39,13 +39,13 @@ def test_main(capsys, mocker, caplog):
     stdout, stderr = capsys.readouterr()
     stdout_lines = [x for x in filter(len, stdout.split("\n"))]  # Split by new line, but exclude empty lines
 
-    results_per_location = [int(re.search(r'Results (\d+)', line).group(1)) > 0 for line in stdout_lines]
+    results_per_location = [int(re.search(r'Results for this location: (\d+)', line).group(1)) > 0 for line in stdout_lines]
     email_html_call = emails.html.call_args_list[0].kwargs
 
     assert len(stdout_lines) == 3  # There much be an output for each search item/location permutation
     assert all(["(bike, bicycle)" in x for x in stdout_lines])  # The keyword must be outputeed in each line
     assert all(
-        [int(re.search(r'Results (\d+)', line).group(1)) > 0 for line in stdout_lines]
+        [int(re.search(r'Results for this location: (\d+)', line).group(1)) > 0 for line in stdout_lines]
     )  # There must be at least 1 result for each search location
     assert email_html_call['subject'] == '[ebay-multilocation-item-notifier] Item summary'
     assert email_html_call['html']  # The message string must not be empty
