@@ -52,7 +52,7 @@ jobs:
           EMAIL_SMTP_USERNAME: ${{ secrets.EMAIL_SMTP_USERNAME }}
         if: github.ref == 'refs/heads/master'
         run: |
-          python ebay_multilocation_item_notifier/itemfinder.py
+          python ebay_multilocation_item_notifier/item_notifier.py
       - name: Send digest email (uppababy vista)
         env:
           EMAIL_RECIPIENT_ADDRESS: ${{ secrets.EMAIL_RECIPIENT_ADDRESS }}

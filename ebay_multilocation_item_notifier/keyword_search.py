@@ -18,7 +18,7 @@ class KeywordSearch():
 
         Returns:
             dict -- A two-dimensional dictionary containing search locations (keys) and results (value)
-                    An example ebaysdk.response.ResponseDataObject (representing an item search result) can be found in tests/test_itemfinder.py
+                    An example ebaysdk.response.ResponseDataObject (representing an item search result) can be found in tests/integration/test_item_notifier.py
         """
         results = dict()
 

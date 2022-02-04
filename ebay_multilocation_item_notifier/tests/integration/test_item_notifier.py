@@ -2,7 +2,7 @@ import re
 import emails
 import pytest
 from collections import namedtuple
-from ebay_multilocation_item_notifier.itemfinder import main
+from ebay_multilocation_item_notifier.item_notifier import main
 from ebay_multilocation_item_notifier.keyword_search import KeywordSearch
 from ebay_multilocation_item_notifier.keyword_search_container import KeywordSearchContainer
 
