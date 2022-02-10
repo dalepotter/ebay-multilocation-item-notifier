@@ -110,6 +110,100 @@ def test_find_items_payload_with_custom_item_filters(mocker, mock_kw_search):
     assert ebaysdk.finding.Connection.execute.call_count == 3
     ebaysdk.finding.Connection.execute.assert_has_calls(expected_calls)
 
+
+def test_generate_item_filter_list_default(mock_kw_search):
+    """The default item filters must be returned when no arguments are passed."""
+    result = mock_kw_search.generate_item_filter_list()
+
+    assert result == [
+        {'name': 'Condition', 'value': 'Used'},
+        {'name': 'ListingType', 'value': 'Auction'},
+        {'name': 'MaxDistance', 'value': '5'},
+        {'name': 'LocalPickupOnly', 'value': True},
+    ]
+
+
+def test_generate_item_filter_list_explicit_default(mock_kw_search):
+    """Defaults passed as an argument must override the package defaults."""
+    mock_default_item_filter = [
+        {'name': 'MaxPrice',
+         'value': 10}
+    ]
+
+    result = mock_kw_search.generate_item_filter_list(
+        default_item_filters=mock_default_item_filter
+    )
+
+    assert result == [
+        {'name': 'MaxPrice', 'value': 10}
+    ]
+
+
+def test_generate_item_filter_list_no_conflicts(mock_kw_search):
+    """A custom item filter list (with no conflicting item filter names) must be merged into the default list as expected."""
+    mock_default_item_filter = [
+        {'name': 'MaxPrice', 'value': 10}
+    ]
+    custom_item_filters_non_conflicting = [
+        {'name': 'Condition', 'value': 'Used'}
+    ]
+
+    result = mock_kw_search.generate_item_filter_list(
+        custom_item_filters_non_conflicting,
+        mock_default_item_filter
+    )
+
+    assert result == [
+        {'name': 'Condition', 'value': 'Used'},
+        {'name': 'MaxPrice', 'value': 10}
+    ]
+
+
+def test_generate_item_filter_list_with_conflicts(mock_kw_search):
+    """A custom item filter list (with a conflicting item filter name) must be merged into the default list as expected."""
+    mock_default_item_filter = [
+        {'name': 'MaxPrice', 'value': 5}
+    ]
+    custom_item_filters_conflicting_name = [
+        {'name': 'MaxPrice', 'value': 10}
+    ]
+
+    result = mock_kw_search.generate_item_filter_list(
+        custom_item_filters_conflicting_name,
+        mock_default_item_filter
+    )
+
+    assert result == [
+        {'name': 'MaxPrice', 'value': 10}
+    ]
+
+
+def test_generate_item_filter_list_independence(mock_kw_search):
+    """Repeated calls to generate an item filter list must be independent from previous calls."""
+    mock_default_item_filter = [
+        {'name': 'MaxPrice', 'value': 5}
+    ]
+    custom_item_filters_itererable = [
+        [
+            {'name': 'Condition', 'value': 'Used'}
+        ],
+        [
+            {'name': 'ListingType', 'value': 'Auction'}
+        ]
+    ]
+
+    for custom_item_filter in custom_item_filters_itererable:
+        result = mock_kw_search.generate_item_filter_list(
+            custom_item_filter,
+            mock_default_item_filter
+        )
+
+    assert result == [
+        {'name': 'ListingType', 'value': 'Auction'},
+        {'name': 'MaxPrice', 'value': 5}
+    ]
+
+
 @pytest.mark.parametrize('mock_cached_results', [
     {},
     {
