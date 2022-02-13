@@ -19,8 +19,8 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
                 'itemFilter': [
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'LocalPickupOnly', 'value': True},
-                    {'name': 'MaxDistance', 'value': '20'}  # Custom value for location 1
+                    {'name': 'MaxDistance', 'value': '20'},  # Custom value for location 1
+                    {'name': 'LocalPickupOnly', 'value': True}
                 ],
                 'buyerPostalCode': 'AB1 2CD',
             }
@@ -31,8 +31,8 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
                 'itemFilter': [
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'LocalPickupOnly', 'value': True},
-                    {'name': 'MaxDistance', 'value': '5'}  # No value set for location 2, so use default value
+                    {'name': 'MaxDistance', 'value': '5'},  # No value set for location 2, so use default value
+                    {'name': 'LocalPickupOnly', 'value': True}
                 ],
                 'buyerPostalCode': 'EF3 5GH',
             }
@@ -43,8 +43,8 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
                 'itemFilter': [
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'LocalPickupOnly', 'value': True},
-                    {'name': 'MaxDistance', 'value': '10'}  # Custom value for location 3
+                    {'name': 'MaxDistance', 'value': '10'},  # Custom value for location 3
+                    {'name': 'LocalPickupOnly', 'value': True}
                 ],
                 'buyerPostalCode': 'IJ6 7KL',
             }
@@ -59,20 +59,20 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
 
 def test_find_items_payload_with_custom_item_filters(mocker, mock_kw_search):
     """An item object with custom item filters must generate the expected API payload."""
-    mock_kw_search.search_filters = [
-        {'name': 'MaxPrice', 'value': 25},
-        {'name': 'LocalPickupOnly', 'value': False}
-    ]
+    mock_kw_search.search_filters = {
+        'MaxPrice': 25,
+        'LocalPickupOnly': False
+    }
     expected_calls = [
         mocker.call(
             'findItemsAdvanced', {
                 'keywords': 'search keyword 1',
                 'itemFilter': [
-                    {'name': 'MaxPrice', 'value': 25},
-                    {'name': 'LocalPickupOnly', 'value': False},
-                    {'name': 'MaxDistance', 'value': '20'},  # Custom value for location 1
                     {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'}
+                    {'name': 'ListingType', 'value': 'Auction'},
+                    {'name': 'MaxDistance', 'value': '20'},  # Custom value for location 1
+                    {'name': 'LocalPickupOnly', 'value': False},
+                    {'name': 'MaxPrice', 'value': 25}
                 ],
                 'buyerPostalCode': 'AB1 2CD',
             }
@@ -81,11 +81,11 @@ def test_find_items_payload_with_custom_item_filters(mocker, mock_kw_search):
             'findItemsAdvanced', {
                 'keywords': 'search keyword 1',
                 'itemFilter': [
-                    {'name': 'MaxPrice', 'value': 25},
-                    {'name': 'LocalPickupOnly', 'value': False},
-                    {'name': 'MaxDistance', 'value': '5'},  # No value set for location 2, so use default value
                     {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'}
+                    {'name': 'ListingType', 'value': 'Auction'},
+                    {'name': 'MaxDistance', 'value': '5'},  # No value set for location 2, so use default value
+                    {'name': 'LocalPickupOnly', 'value': False},
+                    {'name': 'MaxPrice', 'value': 25}
                 ],
                 'buyerPostalCode': 'EF3 5GH',
             }
@@ -94,11 +94,11 @@ def test_find_items_payload_with_custom_item_filters(mocker, mock_kw_search):
             'findItemsAdvanced', {
                 'keywords': 'search keyword 1',
                 'itemFilter': [
-                    {'name': 'MaxPrice', 'value': 25},
-                    {'name': 'LocalPickupOnly', 'value': False},
-                    {'name': 'MaxDistance', 'value': '10'},  # Custom value for location 3
                     {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'}
+                    {'name': 'ListingType', 'value': 'Auction'},
+                    {'name': 'MaxDistance', 'value': '10'},  # Custom value for location 3
+                    {'name': 'LocalPickupOnly', 'value': False},
+                    {'name': 'MaxPrice', 'value': 25}
                 ],
                 'buyerPostalCode': 'IJ6 7KL',
             }
@@ -125,10 +125,7 @@ def test_generate_item_filter_list_default(mock_kw_search):
 
 def test_generate_item_filter_list_explicit_default(mock_kw_search):
     """Defaults passed as an argument must override the package defaults."""
-    mock_default_item_filter = [
-        {'name': 'MaxPrice',
-         'value': 10}
-    ]
+    mock_default_item_filter = {'MaxPrice': 10}
 
     result = mock_kw_search.generate_item_filter_list(
         default_item_filters=mock_default_item_filter
@@ -141,12 +138,8 @@ def test_generate_item_filter_list_explicit_default(mock_kw_search):
 
 def test_generate_item_filter_list_no_conflicts(mock_kw_search):
     """A custom item filter list (with no conflicting item filter names) must be merged into the default list as expected."""
-    mock_default_item_filter = [
-        {'name': 'MaxPrice', 'value': 10}
-    ]
-    custom_item_filters_non_conflicting = [
-        {'name': 'Condition', 'value': 'Used'}
-    ]
+    mock_default_item_filter = {'MaxPrice': 10}
+    custom_item_filters_non_conflicting = {'Condition': 'Used'}
 
     result = mock_kw_search.generate_item_filter_list(
         custom_item_filters_non_conflicting,
@@ -154,19 +147,15 @@ def test_generate_item_filter_list_no_conflicts(mock_kw_search):
     )
 
     assert result == [
-        {'name': 'Condition', 'value': 'Used'},
-        {'name': 'MaxPrice', 'value': 10}
+        {'name': 'MaxPrice', 'value': 10},
+        {'name': 'Condition', 'value': 'Used'}
     ]
 
 
 def test_generate_item_filter_list_with_conflicts(mock_kw_search):
     """A custom item filter list (with a conflicting item filter name) must be merged into the default list as expected."""
-    mock_default_item_filter = [
-        {'name': 'MaxPrice', 'value': 5}
-    ]
-    custom_item_filters_conflicting_name = [
-        {'name': 'MaxPrice', 'value': 10}
-    ]
+    mock_default_item_filter = {'MaxPrice': 5}
+    custom_item_filters_conflicting_name = {'MaxPrice': 10}
 
     result = mock_kw_search.generate_item_filter_list(
         custom_item_filters_conflicting_name,
@@ -180,16 +169,12 @@ def test_generate_item_filter_list_with_conflicts(mock_kw_search):
 
 def test_generate_item_filter_list_independence(mock_kw_search):
     """Repeated calls to generate an item filter list must be independent from previous calls."""
-    mock_default_item_filter = [
-        {'name': 'MaxPrice', 'value': 5}
-    ]
+    mock_default_item_filter = {
+        'MaxPrice': 5
+    }
     custom_item_filters_itererable = [
-        [
-            {'name': 'Condition', 'value': 'Used'}
-        ],
-        [
-            {'name': 'ListingType', 'value': 'Auction'}
-        ]
+        {'Condition': 'Used'},
+        {'ListingType': 'Auction'}
     ]
 
     for custom_item_filter in custom_item_filters_itererable:
@@ -199,8 +184,8 @@ def test_generate_item_filter_list_independence(mock_kw_search):
         )
 
     assert result == [
-        {'name': 'ListingType', 'value': 'Auction'},
-        {'name': 'MaxPrice', 'value': 5}
+        {'name': 'MaxPrice', 'value': 5},
+        {'name': 'ListingType', 'value': 'Auction'}
     ]
 
 

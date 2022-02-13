@@ -185,19 +185,14 @@ MOCK_SEARCH_RESULT_THREE_ITEMS = {
 
 class MockKeywordSearch(KeywordSearch):
     search_keyword = "search keyword 1"
-    search_filters = [
-        {'name': 'Condition',
-         'value': 'Used'},
-        {'name': 'ListingType',
-         'value': 'Auction'},
-        # {'name': 'MaxDistance',
-        #  'value': '5'},
-        {'name': 'LocalPickupOnly',
-         'value': True},
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        # MaxDistance': 5',
+        'LocalPickupOnly': True,
         # Params for searching for sold items:
-        # {'name': 'SoldItemsOnly',
-        #  'value': True}
-    ]
+        # 'SoldItemsOnly': True}
+    }
     search_locations = [
         ['location 1', 'AB1 2CD', 20],
         ['location 2', 'EF3 5GH'],

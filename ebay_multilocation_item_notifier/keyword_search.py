@@ -3,26 +3,21 @@ from ebaysdk.exception import ConnectionError
 from ebaysdk.finding import Connection
 
 
-DEFAULT_ITEM_FILTER_LIST = [
-    {'name': 'Condition',
-     'value': 'Used'},
-    {'name': 'ListingType',
-     'value': 'Auction'},
-    {'name': 'MaxDistance',
-     'value': '5'},
-    {'name': 'LocalPickupOnly',
-     'value': True},
+DEFAULT_ITEM_FILTER_LIST = {
+    'Condition': 'Used',
+    'ListingType': 'Auction',
+    'MaxDistance': '5',
+    'LocalPickupOnly': True,
     # Params for searching for sold items:
-    # {'name': 'SoldItemsOnly',
-    #  'value': True}
-]
+    # 'SoldItemsOnly': True
+}
 
 
 class KeywordSearch():
     """Base class, where the subclass represents one item search."""
     cached_results = {}
     default_search_radius = 5
-    search_filters = []
+    search_filters = {}
     search_keyword = ""
     search_locations = []
     remove_duplicates = False  # If True, only the first item seen will be returned. This will NOT necessarily be at the closest location.
@@ -56,10 +51,7 @@ class KeywordSearch():
             except IndexError:
                 item_filters = []
                 pass
-            item_filters += [
-                {'name': 'MaxDistance',
-                 'value': max_distance}
-            ]
+            item_filters.update({'MaxDistance': max_distance})
 
             try:
                 api_payload = {
@@ -98,20 +90,24 @@ class KeywordSearch():
         Available item filters: https://developer.ebay.com/devzone/finding/CallRef/types/ItemFilterType.html
 
         Inputs:
-            custom_item_filters (list (of dicts)) -- List of item filter dicts to be joined to the default list.
-            default_item_filters (list (of dicts)) -- Initial list of item filter dicts.
+            custom_item_filters (dict) -- Containing item filters to be merged into the default list.
+            default_item_filters (dict) -- Initial list of item filters.
 
         Returns:
-            list (of dicts) -- Merged list of item filter dicts.
+            list (of dicts) -- Item filters in a structure supported by the ebay API.
         """
-        custom_item_filter_names = [x['name'] for x in custom_item_filters]
-        for item_filter in default_item_filters:
-            if item_filter['name'] not in custom_item_filter_names:
-                # Only merge filters that do not exist
-                # `custom_item_filters.append(item_filter)` has side effects
-                custom_item_filters = custom_item_filters + [item_filter]
+        item_filters = default_item_filters.copy()
+        item_filters.update(custom_item_filters)
+        output = list()
+        for key, value in item_filters.items():
+            output.append(
+                {
+                    'name': key,
+                    'value': value
+                }
+            )
 
-        return custom_item_filters
+        return output
 
     @property
     def results(self):
