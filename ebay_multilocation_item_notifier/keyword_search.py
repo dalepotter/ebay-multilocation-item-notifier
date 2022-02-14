@@ -83,7 +83,7 @@ class KeywordSearch():
 
         return results
 
-    def generate_item_filter_list(self, custom_item_filters=[], default_item_filters=DEFAULT_ITEM_FILTER_LIST):
+    def generate_item_filter_list(self, custom_item_filters={}, default_item_filters=DEFAULT_ITEM_FILTER_LIST):
         """Return a list of ebay API item filters. Merges the custom_item_filter into the default_item_filter list.
         Item filters within custom_item_filter always take priority if there are conflicts.
 
