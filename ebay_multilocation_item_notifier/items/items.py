@@ -137,17 +137,32 @@ class NailPuller(EbayBristolToChingfordSearch):
 
 class Morgedal(EbayBristolToChingfordSearch):
     search_keyword = 'morgedal'
-    search_filters = {'MaxPrice': 50}
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        'LocalPickupOnly': True,
+        'MaxPrice': 50
+    }
 
 
 class WallpaperSteamer(EbayBristolToChingfordSearch):
     search_keyword = 'wallpaper (stripper, steamer)'
-    search_filters = {'MaxPrice': 10}
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        'LocalPickupOnly': True,
+        'MaxPrice': 10#
+    }
 
 
 class Brompton(EbayBristolToChingfordSearch):
     search_keyword = "brompton"
-    search_filters = {'MaxPrice': 150}
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        'LocalPickupOnly': True,
+        'MaxPrice': 150
+    }
 
 
 class RaleighCameo(EbayBristolToChingfordSearch):
@@ -156,7 +171,12 @@ class RaleighCameo(EbayBristolToChingfordSearch):
 
 class FoldingBike(EbayBristolToChingfordSearch):
     search_keyword = "folding (bike, bicycle) -(exercise, motor, quad, rack)"
-    search_filters = {'MaxPrice': 80}
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        'LocalPickupOnly': True,
+        'MaxPrice': 80
+    }
 
 
 class UppababyVista(EbayBristolToChingfordSearch):
@@ -165,19 +185,39 @@ class UppababyVista(EbayBristolToChingfordSearch):
 
 class BikeTrailer(EbayBristolToChingfordSearch):
     search_keyword = "(bike, cycle) trailer"
-    search_filters = {'MaxPrice': 25}
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        'LocalPickupOnly': True,
+        'MaxPrice': 25
+    }
 
 
 class SackTruck(EbayBristolToChingfordSearch):
     search_keyword = "sack truck -(antique, vintage, wooden)"
-    search_filters = {'MaxPrice': 20}
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        'LocalPickupOnly': True,
+        'MaxPrice': 20
+    }
 
 
 class BackpackingTent(EbayBristolToChingfordSearch):
     search_keyword = "(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent"
-    search_filters = {'MaxPrice': 40}
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        'LocalPickupOnly': True,
+        'MaxPrice': 40
+    }
 
 
 class Bike(EbayBristolToChingfordSearch):
     search_keyword = "(bike, bicycle) -(boys, childs, exercise, girls, journal, kids, magazine, motor, quad, rack)"
-    search_filters = {'MaxPrice': 15}
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        'LocalPickupOnly': True,
+        'MaxPrice': 15
+    }

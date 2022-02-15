@@ -10,7 +10,12 @@ from ebay_multilocation_item_notifier.keyword_search_container import KeywordSea
 class Bike(KeywordSearch):
     """Set up a search that can be expected to return a large number of items."""
     search_keyword = "(bike, bicycle)"
-    search_filters = {'MaxPrice': 1000}
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        'LocalPickupOnly': True,
+        'MaxPrice': 1000
+    }
     search_locations = [
         #  (Location name, UK location postcode, search radius in miles (optional))
         ("London Charing Cross Station", "WC2N 5HF"),

@@ -3,21 +3,15 @@ from ebaysdk.exception import ConnectionError
 from ebaysdk.finding import Connection
 
 
-DEFAULT_ITEM_FILTER_LIST = {
-    'Condition': 'Used',
-    'ListingType': 'Auction',
-    'MaxDistance': '5',
-    'LocalPickupOnly': True,
-    # Params for searching for sold items:
-    # 'SoldItemsOnly': True
-}
-
-
 class KeywordSearch():
     """Base class, where the subclass represents one item search."""
     cached_results = {}
     default_search_radius = 5
-    search_filters = {}
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        'LocalPickupOnly': True
+    }  # Available item filters: https://developer.ebay.com/devzone/finding/CallRef/types/ItemFilterType.html
     search_keyword = ""
     search_locations = []
     remove_duplicates = False  # If True, only the first item seen will be returned. This will NOT necessarily be at the closest location.
@@ -83,20 +77,19 @@ class KeywordSearch():
 
         return results
 
-    def generate_item_filter_list(self, custom_item_filters={}, default_item_filters=DEFAULT_ITEM_FILTER_LIST):
-        """Return a list of ebay API item filters. Merges the custom_item_filter into the default_item_filter list.
+    def generate_item_filter_list(self, custom_item_filters={}):
+        """Return a list of ebay API item filters. Merges any custom_item_filters into the class search_filters.
         Item filters within custom_item_filter always take priority if there are conflicts.
 
         Available item filters: https://developer.ebay.com/devzone/finding/CallRef/types/ItemFilterType.html
 
         Inputs:
             custom_item_filters (dict) -- Containing item filters to be merged into the default list.
-            default_item_filters (dict) -- Initial list of item filters.
 
         Returns:
             list (of dicts) -- Item filters in a structure supported by the ebay API.
         """
-        item_filters = default_item_filters.copy()
+        item_filters = self.search_filters.copy()
         item_filters.update(custom_item_filters)
         output = list()
         for key, value in item_filters.items():
