@@ -237,9 +237,15 @@ def mock_response_three_items():
 
 
 @pytest.fixture
-def mock_kw_search(mocker, mock_response_three_items):
-    """Return a mock `KeywordSearch` object that returns three items for each location."""
+def MockKwSearch(mocker, mock_response_three_items):
+    """Return a `MockKeywordSearch` class that returns three items for each location."""
     mocker.patch.object(ebaysdk.finding.Connection, 'execute')
     ebaysdk.finding.Connection.execute.return_value = mock_response_three_items
 
-    return MockKeywordSearch()
+    return MockKeywordSearch
+
+
+@pytest.fixture
+def mock_kw_search(MockKwSearch):
+    """Return an instance of `MockKeywordSearch`."""
+    return MockKwSearch()
