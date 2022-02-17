@@ -54,11 +54,7 @@ class KeywordSearch(metaclass=KeywordSearchMeta):
             except IndexError:
                 pass
 
-            try:
-                item_filters = self.search_filters.copy()
-            except IndexError:
-                item_filters = []
-                pass
+            item_filters = self.search_filters.copy()
             item_filters.update({'MaxDistance': max_distance})
 
             try:
