@@ -58,8 +58,11 @@ def test_single_location_results_in_template(email_content_bs4_soup):
 
     assert len(search_keywords) == 1  # `mock_container` has only one kw search object
     assert search_keywords[0].text == 'search keyword 1'
-    assert len(location_1_lines) == 3  # `mock_container` contains 3 items for each location
+    assert (
+        len(location_1_lines)
+        == len(location_2_lines)
+        == len(location_3_lines)
+        == 3
+    )  # `mock_container` contains 3 items for each location
     assert location_1_lines[0].find('a').text == 'BROMPTON M-TYPE M6L RAW LACQUER 6 SPEED FOLDING BIKE BICYCLE'
-    assert len(location_2_lines) == 3
-    assert len(location_3_lines) == 3
     # Build up more expected strings to be found in the rendered template here.
