@@ -6,19 +6,14 @@ class BasicKeywordSearch(KeywordSearch):
     """Base class, where the subclass represents one item search."""
     default_search_radius = 5
     remove_duplicates = True
-    search_filters = [
-        {'name': 'Condition',
-         'value': 'Used'},
-        {'name': 'ListingType',
-         'value': 'Auction'},
-        # {'name': 'MaxDistance',
-        #  'value': '5'},
-        {'name': 'LocalPickupOnly',
-         'value': True},
+    search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        # 'MaxDistance': '5',
+        'LocalPickupOnly': True,
         # Params for searching for sold items:
-        # {'name': 'SoldItemsOnly',
-        #  'value': True}
-    ]
+        # 'SoldItemsOnly': True
+    }
     search_keyword = ""
 
 
@@ -142,23 +137,17 @@ class NailPuller(EbayBristolToExeterSearch):
 
 class Morgedal(EbayBristolToExeterSearch):
     search_keyword = 'morgedal'
-    search_filters = [
-        {'name': 'MaxPrice', 'value': 50}
-    ]
+    search_filters = {'MaxPrice': 50}
 
 
 class WallpaperSteamer(EbayBristolToExeterSearch):
     search_keyword = 'wallpaper (stripper, steamer)'
-    search_filters = [
-        {'name': 'MaxPrice', 'value': 10}
-    ]
+    search_filters = {'MaxPrice': 10}
 
 
 class Brompton(EbayBristolToExeterSearch):
     search_keyword = "brompton"
-    search_filters = [
-        {'name': 'MaxPrice', 'value': 150}
-    ]
+    search_filters = {'MaxPrice': 150}
 
 
 class RaleighCameo(EbayBristolToExeterSearch):
@@ -167,9 +156,7 @@ class RaleighCameo(EbayBristolToExeterSearch):
 
 class FoldingBike(EbayBristolToExeterSearch):
     search_keyword = "folding (bike, bicycle) -(exercise, motor, quad, rack)"
-    search_filters = [
-        {'name': 'MaxPrice', 'value': 80}
-    ]
+    search_filters = {'MaxPrice': 80}
 
 
 class UppababyVista(EbayBristolToExeterSearch):
@@ -178,27 +165,19 @@ class UppababyVista(EbayBristolToExeterSearch):
 
 class BikeTrailer(EbayBristolToExeterSearch):
     search_keyword = "(bike, cycle) trailer"
-    search_filters = [
-        {'name': 'MaxPrice', 'value': 25}
-    ]
+    search_filters = {'MaxPrice': 25}
 
 
 class SackTruck(EbayBristolToExeterSearch):
     search_keyword = "sack truck -(antique, vintage, wooden)"
-    search_filters = [
-        {'name': 'MaxPrice', 'value': 20}
-    ]
+    search_filters = {'MaxPrice': 20}
 
 
 class BackpackingTent(EbayBristolToExeterSearch):
     search_keyword = "(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent"
-    search_filters = [
-        {'name': 'MaxPrice', 'value': 40}
-    ]
+    search_filters = {'MaxPrice': 40}
 
 
 class Bike(EbayBristolToExeterSearch):
     search_keyword = "(bike, bicycle) -(boys, childs, exercise, girls, journal, kids, magazine, motor, quad, rack)"
-    search_filters = [
-        {'name': 'MaxPrice', 'value': 15}
-    ]
+    search_filters = {'MaxPrice': 15}

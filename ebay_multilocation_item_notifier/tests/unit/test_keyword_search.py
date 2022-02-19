@@ -1,6 +1,7 @@
 import ebaysdk
 import pytest
 import ebay_multilocation_item_notifier.tests.conftest as conftest
+from ebay_multilocation_item_notifier.keyword_search import KeywordSearch
 
 
 def test_find_items_returns_dict(mock_kw_search):
@@ -17,9 +18,9 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
             'findItemsAdvanced', {
                 'keywords': 'search keyword 1',
                 'itemFilter': [
+                    {'name': 'LocalPickupOnly', 'value': True},
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'LocalPickupOnly', 'value': True},
                     {'name': 'MaxDistance', 'value': '20'}  # Custom value for location 1
                 ],
                 'buyerPostalCode': 'AB1 2CD',
@@ -29,9 +30,9 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
             'findItemsAdvanced', {
                 'keywords': 'search keyword 1',
                 'itemFilter': [
+                    {'name': 'LocalPickupOnly', 'value': True},
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'LocalPickupOnly', 'value': True},
                     {'name': 'MaxDistance', 'value': '5'}  # No value set for location 2, so use default value
                 ],
                 'buyerPostalCode': 'EF3 5GH',
@@ -41,9 +42,9 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
             'findItemsAdvanced', {
                 'keywords': 'search keyword 1',
                 'itemFilter': [
+                    {'name': 'LocalPickupOnly', 'value': True},
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'LocalPickupOnly', 'value': True},
                     {'name': 'MaxDistance', 'value': '10'}  # Custom value for location 3
                 ],
                 'buyerPostalCode': 'IJ6 7KL',
@@ -57,22 +58,24 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
     ebaysdk.finding.Connection.execute.assert_has_calls(expected_calls)
 
 
-def test_find_items_payload_with_custom_item_filters(mocker, mock_kw_search):
+def test_find_items_payload_with_custom_item_filters(mocker, MockKwSearch):
     """An item object with custom item filters must generate the expected API payload."""
-    mock_kw_search.search_filters = [
-        {'name': 'MaxPrice', 'value': 25},
-        {'name': 'LocalPickupOnly', 'value': False}
-    ]
+    class MockKeywordSearchCustomFilters(MockKwSearch):
+        search_filters = {
+            'LocalPickupOnly': False,  # Overwrites key/value set in MockKeywordSearch
+            'MaxPrice': 25  # Adds new key/value not set in MockKeywordSearch
+        }
+
     expected_calls = [
         mocker.call(
             'findItemsAdvanced', {
                 'keywords': 'search keyword 1',
                 'itemFilter': [
-                    {'name': 'MaxPrice', 'value': 25},
                     {'name': 'LocalPickupOnly', 'value': False},
-                    {'name': 'MaxDistance', 'value': '20'},  # Custom value for location 1
                     {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'}
+                    {'name': 'ListingType', 'value': 'Auction'},
+                    {'name': 'MaxPrice', 'value': 25},
+                    {'name': 'MaxDistance', 'value': '20'}  # Custom value for location 1
                 ],
                 'buyerPostalCode': 'AB1 2CD',
             }
@@ -81,11 +84,11 @@ def test_find_items_payload_with_custom_item_filters(mocker, mock_kw_search):
             'findItemsAdvanced', {
                 'keywords': 'search keyword 1',
                 'itemFilter': [
-                    {'name': 'MaxPrice', 'value': 25},
                     {'name': 'LocalPickupOnly', 'value': False},
-                    {'name': 'MaxDistance', 'value': '5'},  # No value set for location 2, so use default value
                     {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'}
+                    {'name': 'ListingType', 'value': 'Auction'},
+                    {'name': 'MaxPrice', 'value': 25},
+                    {'name': 'MaxDistance', 'value': '5'}  # No value set for location 2, so use default value
                 ],
                 'buyerPostalCode': 'EF3 5GH',
             }
@@ -94,21 +97,59 @@ def test_find_items_payload_with_custom_item_filters(mocker, mock_kw_search):
             'findItemsAdvanced', {
                 'keywords': 'search keyword 1',
                 'itemFilter': [
-                    {'name': 'MaxPrice', 'value': 25},
                     {'name': 'LocalPickupOnly', 'value': False},
-                    {'name': 'MaxDistance', 'value': '10'},  # Custom value for location 3
                     {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'}
+                    {'name': 'ListingType', 'value': 'Auction'},
+                    {'name': 'MaxPrice', 'value': 25},
+                    {'name': 'MaxDistance', 'value': '10'}  # Custom value for location 3
                 ],
                 'buyerPostalCode': 'IJ6 7KL',
             }
         )
     ]
 
-    mock_kw_search.find_items()
+    _ = MockKeywordSearchCustomFilters().find_items()
 
     assert ebaysdk.finding.Connection.execute.call_count == 3
     ebaysdk.finding.Connection.execute.assert_has_calls(expected_calls)
+
+
+def test_generate_item_filter_list_structure(mock_kw_search):
+    """An item filter list must be returned with the expected structure."""
+    mock_kw_search.search_filters = {
+        'Condition': 'Used',
+        'ListingType': 'Auction',
+        'MaxDistance': 10,
+        'LocalPickupOnly': True
+    }
+
+    result = mock_kw_search.generate_item_filter_list()
+
+    assert result == [
+        {'name': 'Condition', 'value': 'Used'},
+        {'name': 'ListingType', 'value': 'Auction'},
+        {'name': 'MaxDistance', 'value': 10},
+        {'name': 'LocalPickupOnly', 'value': True},
+    ]
+
+
+@pytest.mark.parametrize('child_search_filters', [
+    {'Condition': 'Used'},  # Key not in parent dict
+    {'LocalPickupOnly': False},  # Overwriting key/value in parent dict
+])
+def test_search_filters_merged_keys(child_search_filters):
+    """An item filter list must be returned containing key/value pairs from parent classes."""
+    class ChildKeywordSearch(KeywordSearch):
+        search_filters = child_search_filters
+    parent_kw_search = KeywordSearch()  # KeywordSearch defines `search_filters = {'LocalPickupOnly': True}`
+    child_kw_search = ChildKeywordSearch()
+
+    result = child_kw_search.search_filters
+
+    assert child_search_filters.items() <= result.items()  # All child search filters must be present in the result
+    assert 'LocalPickupOnly' in result.keys()  # Parent `search_filters` key must be inherited (regardless of child `search_filters` defintion)
+    assert parent_kw_search.search_filters == {'LocalPickupOnly': True}  # Original key/value must remain in parent
+
 
 @pytest.mark.parametrize('mock_cached_results', [
     {},

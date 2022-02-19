@@ -1,14 +1,31 @@
 import datetime
 from ebaysdk.exception import ConnectionError
 from ebaysdk.finding import Connection
-from ebay_multilocation_item_notifier.utils import generate_item_filter_list
 
 
-class KeywordSearch():
+class KeywordSearchMeta(type):
+    """Meta class controlling behaviour of new class objects."""
+    def __new__(cls, name, bases, attrs):
+        """Merge `.search_filters` from parent classes."""
+        new_cls = super(KeywordSearchMeta, cls).__new__(cls, name, bases, attrs)
+
+        base_search_filters = [bc.search_filters for bc in bases if hasattr(bc, 'search_filters')]
+        search_filters = base_search_filters + [new_cls.search_filters]
+
+        new_cls.search_filters = {}
+        for filter in search_filters:
+            new_cls.search_filters.update(filter)
+
+        return new_cls
+
+
+class KeywordSearch(metaclass=KeywordSearchMeta):
     """Base class, where the subclass represents one item search."""
     cached_results = {}
     default_search_radius = 5
-    search_filters = []
+    search_filters = {
+        'LocalPickupOnly': True
+    }  # Available item filters: https://developer.ebay.com/devzone/finding/CallRef/types/ItemFilterType.html
     search_keyword = ""
     search_locations = []
     remove_duplicates = False  # If True, only the first item seen will be returned. This will NOT necessarily be at the closest location.
@@ -37,20 +54,13 @@ class KeywordSearch():
             except IndexError:
                 pass
 
-            try:
-                item_filters = self.search_filters.copy()
-            except IndexError:
-                item_filters = []
-                pass
-            item_filters += [
-                {'name': 'MaxDistance',
-                 'value': max_distance}
-            ]
+            item_filters = self.search_filters.copy()
+            item_filters.update({'MaxDistance': max_distance})
 
             try:
                 api_payload = {
                     'keywords': self.search_keyword,
-                    'itemFilter': generate_item_filter_list(item_filters),
+                    'itemFilter': self.generate_item_filter_list(item_filters),
                     'buyerPostalCode': postcode
                 }
 
@@ -77,8 +87,30 @@ class KeywordSearch():
 
         return results
 
-    def generate_item_filter_list(self):
-        pass
+    def generate_item_filter_list(self, custom_item_filters={}):
+        """Return a list of ebay API item filters. Merges any custom_item_filters into the class search_filters.
+        Item filters within custom_item_filter always take priority if there are conflicts.
+
+        Available item filters: https://developer.ebay.com/devzone/finding/CallRef/types/ItemFilterType.html
+
+        Inputs:
+            custom_item_filters (dict) -- Containing item filters to be merged into the default list.
+
+        Returns:
+            list (of dicts) -- Item filters in a structure supported by the ebay API.
+        """
+        item_filters = self.search_filters.copy()
+        item_filters.update(custom_item_filters)
+        output = list()
+        for key, value in item_filters.items():
+            output.append(
+                {
+                    'name': key,
+                    'value': value
+                }
+            )
+
+        return output
 
     @property
     def results(self):
