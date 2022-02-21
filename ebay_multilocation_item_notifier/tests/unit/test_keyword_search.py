@@ -13,6 +13,11 @@ def test_find_items_returns_dict(mock_kw_search):
 
 def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
     """An item object with default item filters must generate the expected API payload."""
+    mock_kw_search.search_locations = [
+        ['location 1', 'AB1 2CD', 30],
+        ['location 2', 'EF3 5GH'],
+        ['location 3', 'IJ6 7KL', 20]
+    ]
     expected_calls = [
         mocker.call(
             'findItemsAdvanced', {
@@ -21,7 +26,7 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
                     {'name': 'LocalPickupOnly', 'value': True},
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'MaxDistance', 'value': '20'}  # Custom value for location 1
+                    {'name': 'MaxDistance', 'value': '30'}  # Custom value for location 1
                 ],
                 'buyerPostalCode': 'AB1 2CD',
             }
@@ -45,7 +50,7 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
                     {'name': 'LocalPickupOnly', 'value': True},
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'MaxDistance', 'value': '10'}  # Custom value for location 3
+                    {'name': 'MaxDistance', 'value': '20'}  # Custom value for location 3
                 ],
                 'buyerPostalCode': 'IJ6 7KL',
             }
@@ -75,7 +80,7 @@ def test_find_items_payload_with_custom_item_filters(mocker, MockKwSearch):
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
                     {'name': 'MaxPrice', 'value': 25},
-                    {'name': 'MaxDistance', 'value': '20'}  # Custom value for location 1
+                    {'name': 'MaxDistance', 'value': '20'}  # `MockKwSearch` sets custom value for location 1
                 ],
                 'buyerPostalCode': 'AB1 2CD',
             }
@@ -88,7 +93,7 @@ def test_find_items_payload_with_custom_item_filters(mocker, MockKwSearch):
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
                     {'name': 'MaxPrice', 'value': 25},
-                    {'name': 'MaxDistance', 'value': '5'}  # No value set for location 2, so use default value
+                    {'name': 'MaxDistance', 'value': '5'}  # No custom value set for location 2, so use default value
                 ],
                 'buyerPostalCode': 'EF3 5GH',
             }
@@ -101,7 +106,7 @@ def test_find_items_payload_with_custom_item_filters(mocker, MockKwSearch):
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
                     {'name': 'MaxPrice', 'value': 25},
-                    {'name': 'MaxDistance', 'value': '10'}  # Custom value for location 3
+                    {'name': 'MaxDistance', 'value': '10'}  # MockKwSearch` sets custom value for location 3
                 ],
                 'buyerPostalCode': 'IJ6 7KL',
             }
