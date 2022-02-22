@@ -24,9 +24,9 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
                 'keywords': 'search keyword 1',
                 'itemFilter': [
                     {'name': 'LocalPickupOnly', 'value': True},
+                    {'name': 'MaxDistance', 'value': '30'},  # Custom value for location 1
                     {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'MaxDistance', 'value': '30'}  # Custom value for location 1
+                    {'name': 'ListingType', 'value': 'Auction'}
                 ],
                 'buyerPostalCode': 'AB1 2CD',
             }
@@ -36,9 +36,9 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
                 'keywords': 'search keyword 1',
                 'itemFilter': [
                     {'name': 'LocalPickupOnly', 'value': True},
+                    {'name': 'MaxDistance', 'value': '5'},  # No value set for location 2, so use default value
                     {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'MaxDistance', 'value': '5'}  # No value set for location 2, so use default value
+                    {'name': 'ListingType', 'value': 'Auction'}
                 ],
                 'buyerPostalCode': 'EF3 5GH',
             }
@@ -48,9 +48,9 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
                 'keywords': 'search keyword 1',
                 'itemFilter': [
                     {'name': 'LocalPickupOnly', 'value': True},
+                    {'name': 'MaxDistance', 'value': '20'},  # Custom value for location 3
                     {'name': 'Condition', 'value': 'Used'},
-                    {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'MaxDistance', 'value': '20'}  # Custom value for location 3
+                    {'name': 'ListingType', 'value': 'Auction'}
                 ],
                 'buyerPostalCode': 'IJ6 7KL',
             }
@@ -77,10 +77,10 @@ def test_find_items_payload_with_custom_item_filters(mocker, MockKwSearch):
                 'keywords': 'search keyword 1',
                 'itemFilter': [
                     {'name': 'LocalPickupOnly', 'value': False},
+                    {'name': 'MaxDistance', 'value': '20'},  # `MockKwSearch` sets custom value for location 1
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'MaxPrice', 'value': 25},
-                    {'name': 'MaxDistance', 'value': '20'}  # `MockKwSearch` sets custom value for location 1
+                    {'name': 'MaxPrice', 'value': 25}
                 ],
                 'buyerPostalCode': 'AB1 2CD',
             }
@@ -90,10 +90,10 @@ def test_find_items_payload_with_custom_item_filters(mocker, MockKwSearch):
                 'keywords': 'search keyword 1',
                 'itemFilter': [
                     {'name': 'LocalPickupOnly', 'value': False},
+                    {'name': 'MaxDistance', 'value': '5'},  # No custom value set for location 2, so use default value
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'MaxPrice', 'value': 25},
-                    {'name': 'MaxDistance', 'value': '5'}  # No custom value set for location 2, so use default value
+                    {'name': 'MaxPrice', 'value': 25}
                 ],
                 'buyerPostalCode': 'EF3 5GH',
             }
@@ -103,10 +103,10 @@ def test_find_items_payload_with_custom_item_filters(mocker, MockKwSearch):
                 'keywords': 'search keyword 1',
                 'itemFilter': [
                     {'name': 'LocalPickupOnly', 'value': False},
+                    {'name': 'MaxDistance', 'value': '10'},  # MockKwSearch` sets custom value for location 3
                     {'name': 'Condition', 'value': 'Used'},
                     {'name': 'ListingType', 'value': 'Auction'},
-                    {'name': 'MaxPrice', 'value': 25},
-                    {'name': 'MaxDistance', 'value': '10'}  # MockKwSearch` sets custom value for location 3
+                    {'name': 'MaxPrice', 'value': 25}
                 ],
                 'buyerPostalCode': 'IJ6 7KL',
             }
@@ -153,7 +153,7 @@ def test_search_filters_merged_keys(child_search_filters):
 
     assert child_search_filters.items() <= result.items()  # All child search filters must be present in the result
     assert 'LocalPickupOnly' in result.keys()  # Parent `search_filters` key must be inherited (regardless of child `search_filters` defintion)
-    assert parent_kw_search.search_filters == {'LocalPickupOnly': True}  # Original key/value must remain in parent
+    assert parent_kw_search.search_filters == {'LocalPickupOnly': True, 'MaxDistance': '5'}  # Original keys/values must remain in parent
 
 
 @pytest.mark.parametrize('mock_cached_results', [

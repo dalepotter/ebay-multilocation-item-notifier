@@ -4,12 +4,11 @@ from ebay_multilocation_item_notifier.keyword_search import KeywordSearch
 
 class BasicKeywordSearch(KeywordSearch):
     """Base class, where the subclass represents one item search."""
-    default_search_radius = 5
     remove_duplicates = True
     search_filters = {
         'Condition': 'Used',
         'ListingType': 'Auction',
-        # 'MaxDistance': '5',
+        'MaxDistance': '5',
         'LocalPickupOnly': True,
         # Params for searching for sold items:
         # 'SoldItemsOnly': True

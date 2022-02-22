@@ -22,9 +22,9 @@ class KeywordSearchMeta(type):
 class KeywordSearch(metaclass=KeywordSearchMeta):
     """Base class, where the subclass represents one item search."""
     cached_results = {}
-    default_search_radius = 5
     search_filters = {
-        'LocalPickupOnly': True
+        'LocalPickupOnly': True,
+        'MaxDistance': '5'
     }  # Available item filters: https://developer.ebay.com/devzone/finding/CallRef/types/ItemFilterType.html
     search_keyword = ""
     search_locations = []
@@ -48,14 +48,11 @@ class KeywordSearch(metaclass=KeywordSearchMeta):
         for search_location in self.search_locations:
             search_location_name = search_location[0]
             postcode = search_location[1]
-            max_distance = str(self.default_search_radius)
+            item_filters = self.search_filters.copy()
             try:
-                max_distance = str(search_location[2])
+                item_filters.update({'MaxDistance': str(search_location[2])})
             except IndexError:
                 pass
-
-            item_filters = self.search_filters.copy()
-            item_filters.update({'MaxDistance': max_distance})
 
             try:
                 api_payload = {
