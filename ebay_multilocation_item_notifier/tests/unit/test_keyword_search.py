@@ -12,7 +12,7 @@ def test_find_items_returns_dict(mock_kw_search):
 
 
 def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
-    """An item object with default item filters must generate the expected API payload."""
+    """A `KeywordSearch` object with default item filters must generate the expected API payload."""
     mock_kw_search.search_locations = [
         ['location 1', 'AB1 2CD', 30],
         ['location 2', 'EF3 5GH'],
@@ -64,7 +64,7 @@ def test_find_items_payload_default_item_filters(mocker, mock_kw_search):
 
 
 def test_find_items_payload_with_custom_item_filters(mocker, MockKwSearch):
-    """An item object with custom item filters must generate the expected API payload."""
+    """A `KeywordSearch` object with custom item filters must generate the expected API payload."""
     class MockKeywordSearchCustomFilters(MockKwSearch):
         search_filters = {
             'LocalPickupOnly': False,  # Overwrites key/value set in MockKeywordSearch
@@ -120,7 +120,7 @@ def test_find_items_payload_with_custom_item_filters(mocker, MockKwSearch):
 
 
 def test_find_items_largest_max_distance(mocker, mock_kw_search):
-    """An item object with location search radiuses disabled must generate the expected API payload."""
+    """A `KeywordSearch` object with location search radiuses disabled must generate the expected API payload."""
     mock_kw_search.location_radius_overrides_default_search_radius = False
     mock_kw_search.search_filters = {'MaxDistance': '10'}
     mock_kw_search.search_locations = [
@@ -210,7 +210,7 @@ def test_search_filters_merged_keys(child_search_filters):
     }
 ])
 def test_results_no_cache_calls_find_items(mocker, mock_kw_search, mock_cached_results):
-    """An item object with no cached results calls find_items."""
+    """A `KeywordSearch` object with no cached results calls find_items."""
     mock_kw_search.cached_results = mock_cached_results
     spy = mocker.spy(conftest.MockKeywordSearch, 'find_items')
 
