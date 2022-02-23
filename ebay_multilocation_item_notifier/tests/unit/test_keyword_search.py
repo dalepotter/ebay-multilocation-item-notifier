@@ -119,6 +119,51 @@ def test_find_items_payload_with_custom_item_filters(mocker, MockKwSearch):
     ebaysdk.finding.Connection.execute.assert_has_calls(expected_calls)
 
 
+def test_find_items_largest_max_distance(mocker, mock_kw_search):
+    """An item object with location search radiuses disabled must generate the expected API payload."""
+    mock_kw_search.location_radius_overrides_default_search_radius = False
+    mock_kw_search.search_filters = {'MaxDistance': '10'}
+    mock_kw_search.search_locations = [
+        ['location 1', 'AB1 2CD', 30],
+        ['location 2', 'EF3 5GH'],
+        ['location 3', 'IJ6 7KL', 20]
+    ]
+    expected_calls = [
+        mocker.call(
+            'findItemsAdvanced', {
+                'keywords': 'search keyword 1',
+                'itemFilter': [
+                    {'name': 'MaxDistance', 'value': '10'},  # `mock_kw_search` overrides custom value for location 1
+                ],
+                'buyerPostalCode': 'AB1 2CD',
+            }
+        ),
+        mocker.call(
+            'findItemsAdvanced', {
+                'keywords': 'search keyword 1',
+                'itemFilter': [
+                    {'name': 'MaxDistance', 'value': '10'},  # mock_kw_search` uses default search radius anyway
+                ],
+                'buyerPostalCode': 'EF3 5GH',
+            }
+        ),
+        mocker.call(
+            'findItemsAdvanced', {
+                'keywords': 'search keyword 1',
+                'itemFilter': [
+                    {'name': 'MaxDistance', 'value': '10'},  # mock_kw_search` overrides custom value for location 3
+                ],
+                'buyerPostalCode': 'IJ6 7KL',
+            }
+        )
+    ]
+
+    _ = mock_kw_search.find_items()
+
+    assert ebaysdk.finding.Connection.execute.call_count == 3
+    ebaysdk.finding.Connection.execute.assert_has_calls(expected_calls)
+
+
 def test_generate_item_filter_list_structure(mock_kw_search):
     """An item filter list must be returned with the expected structure."""
     mock_kw_search.search_filters = {

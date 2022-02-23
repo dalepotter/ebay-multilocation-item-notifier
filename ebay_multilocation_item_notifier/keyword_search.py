@@ -22,6 +22,7 @@ class KeywordSearchMeta(type):
 class KeywordSearch(metaclass=KeywordSearchMeta):
     """Base class, where the subclass represents one item search."""
     cached_results = {}
+    location_radius_overrides_default_search_radius = True
     search_filters = {
         'LocalPickupOnly': True,
         'MaxDistance': '5'
@@ -49,10 +50,11 @@ class KeywordSearch(metaclass=KeywordSearchMeta):
             search_location_name = search_location[0]
             postcode = search_location[1]
             item_filters = self.search_filters.copy()
-            try:
-                item_filters.update({'MaxDistance': str(search_location[2])})
-            except IndexError:
-                pass
+            if self.location_radius_overrides_default_search_radius:
+                try:
+                    item_filters.update({'MaxDistance': str(search_location[2])})
+                except IndexError:
+                    pass
 
             try:
                 api_payload = {
