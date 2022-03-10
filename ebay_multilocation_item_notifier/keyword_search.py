@@ -6,15 +6,16 @@ from ebaysdk.finding import Connection
 class KeywordSearchMeta(type):
     """Meta class controlling behaviour of new class objects."""
     def __new__(cls, name, bases, attrs):
-        """Merge `.search_filters` from parent classes."""
+        """Merge `.search_filters` from parent classes (if permitted by the child class)."""
         new_cls = super(KeywordSearchMeta, cls).__new__(cls, name, bases, attrs)
 
-        base_search_filters = [bc.search_filters for bc in bases if hasattr(bc, 'search_filters')]
-        search_filters = base_search_filters + [new_cls.search_filters]
+        if new_cls.merge_parent_search_filters:
+            base_search_filters = [bc.search_filters for bc in bases if hasattr(bc, 'search_filters')]
+            search_filters = base_search_filters + [new_cls.search_filters]
 
-        new_cls.search_filters = {}
-        for filter in search_filters:
-            new_cls.search_filters.update(filter)
+            new_cls.search_filters = {}
+            for filter in search_filters:
+                new_cls.search_filters.update(filter)
 
         return new_cls
 
@@ -23,6 +24,7 @@ class KeywordSearch(metaclass=KeywordSearchMeta):
     """Base class, where the subclass represents one item search."""
     cached_results = {}
     location_radius_overrides_default_search_radius = True
+    merge_parent_search_filters = True
     search_filters = {
         'LocalPickupOnly': True,
         'MaxDistance': '5'

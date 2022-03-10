@@ -201,6 +201,24 @@ def test_search_filters_merged_keys(child_search_filters):
     assert parent_kw_search.search_filters == {'LocalPickupOnly': True, 'MaxDistance': '5'}  # Original keys/values must remain in parent
 
 
+@pytest.mark.parametrize('child_search_filters', [
+    {'Condition': 'Used'},  # Key not in parent dict
+    {'LocalPickupOnly': False},  # Overwriting key/value in parent dict
+])
+def test_search_filters_unmerged_keys(child_search_filters):
+    """An item filter list must not contain key/value pairs from parent classes if merging is disabled."""
+    class ChildKeywordSearch(KeywordSearch):
+        merge_parent_search_filters = False   # Merging disabled
+        search_filters = child_search_filters
+    parent_kw_search = KeywordSearch()  # KeywordSearch defines `search_filters = {'LocalPickupOnly': True}`
+    child_kw_search = ChildKeywordSearch()
+
+    result = child_kw_search.search_filters
+
+    assert result.items() == child_search_filters.items()  # All child search filters must be present in the result
+    assert parent_kw_search.search_filters == {'LocalPickupOnly': True, 'MaxDistance': '5'}  # Original keys/values must remain in parent
+
+
 @pytest.mark.parametrize('mock_cached_results', [
     {},
     {
