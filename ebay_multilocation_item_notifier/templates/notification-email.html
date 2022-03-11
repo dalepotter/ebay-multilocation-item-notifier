@@ -1,10 +1,10 @@
 <p>The following items were found for the specified locations listed:</p>
 
-{% for keyword, items_by_location in results.items() -%}
-  <p><strong>{{ keyword }}</strong></p>
+{% for keyword_search in search_list -%}
+  <p><strong>{{ keyword_search.search_keyword }}</strong></p>
   <ul>
-  {% for location, items_list in items_by_location.items() -%}
-    {% for item in items_list.item -%}
+  {% for location, loc_results in keyword_search.results.items() -%}
+    {% for item in loc_results.item -%}
       <li>
         {{ location }}:
         <a href="{{ item.viewItemURL }}">{{ item.title }}</a> -

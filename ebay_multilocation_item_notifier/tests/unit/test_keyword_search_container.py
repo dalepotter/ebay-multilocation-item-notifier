@@ -13,26 +13,6 @@ def test_input_searches_added_to_list(mock_kw_search, number_of_mock_searches):
 
     assert len(mock_container.search_list) == number_of_mock_searches
 
-
-def test_aggregate_search_results(mock_kw_search):
-    """A two-dimensional dict containing search results for all containers must be returned."""
-    mock_container = KeywordSearchContainer(
-        mock_kw_search
-    )
-
-    result = mock_container.aggregate_search_results
-
-    assert isinstance(result, dict)
-    assert len(result.values()) == 1  # There is only one `KeywordSearch` within the `KeywordSearchContainer`
-    assert len(result['search keyword 1'].values()) == 3  # The`KeywordSearch` contains results for each of its three locations
-    assert (
-        len(result['search keyword 1']['location 1'].item)
-        == len(result['search keyword 1']['location 2'].item)
-        == len(result['search keyword 1']['location 3'].item)
-        == 3
-    )  # Each location has three items
-
-
 @pytest.fixture
 def email_content_bs4_soup(mock_kw_search):
     """Returns email body content as a `BeautifulSoup` object."""
