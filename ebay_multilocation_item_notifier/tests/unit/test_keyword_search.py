@@ -254,6 +254,6 @@ def test_results_removes_duplicates_items_found(mock_kw_search):
 
     result = mock_kw_search.results
 
-    assert len(getattr(result['location 1'], 'item', list())) == 0  # location 3 was mocked to contain zero items
+    assert len(getattr(result['location 1'], 'item', list())) == 0  # location 1 was mocked to contain zero items
     assert len(getattr(result['location 2'], 'item', list())) == 3
     assert len(getattr(result['location 3'], 'item', list())) == 0  # location 3 was mocked to contain same items as location 2, so remove all

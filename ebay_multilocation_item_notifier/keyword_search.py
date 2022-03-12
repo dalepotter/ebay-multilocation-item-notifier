@@ -37,8 +37,9 @@ class KeywordSearch(metaclass=KeywordSearchMeta):
         """Return a dictionary of items for the search keyword and search locations.
 
         Returns:
-            dict -- A two-dimensional dictionary containing search locations (keys) and results (value)
-                    An example ebaysdk.response.ResponseDataObject (representing an item search result) can be found in tests/integration/test_item_notifier.py
+            dict -- Containing [key] locaton (string) and [value] search results (ebaysdk.response.ResponseDataObject).
+                    An example ebaysdk.response.ResponseDataObject (representing a search result for a single location)
+                    can be found in tests/integration/test_item_notifier.py
         """
         results = dict()
 
@@ -118,7 +119,7 @@ class KeywordSearch(metaclass=KeywordSearchMeta):
         """Return search results (either from cached data, or through calling the ebay API).
 
         Returns:
-            dict -- Two dimensional dict containing item keywords (key) and dict of item location results.
+            dict -- Containing [key] locaton (string) and [value] search results (ebaysdk.response.ResponseDataObject).
         """
         if not self.cached_results:
             self.cached_results = self.find_items()
