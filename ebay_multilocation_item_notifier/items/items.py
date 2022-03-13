@@ -162,6 +162,16 @@ class UppababyVista(EbayBristolToExeterSearch):
     search_keyword = '(uppababy, uppa baby, upper baby) vista'
 
 
+class UppababyVistaBristolToChingford(EbayBristolToChingfordSearch):
+    merge_parent_search_filters = False
+    remove_duplicates = False
+    search_keyword = '(uppababy, uppa baby, upper baby) vista'
+    search_filters = {
+        'LocalPickupOnly': True,
+        'MaxDistance': '10',
+    }
+
+
 class BikeTrailer(EbayBristolToExeterSearch):
     search_keyword = "(bike, cycle) trailer"
     search_filters = {'MaxPrice': 25}

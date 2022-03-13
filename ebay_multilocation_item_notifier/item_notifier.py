@@ -11,6 +11,7 @@ items = KeywordSearchContainer(
     items.RaleighCameo(),
     items.FoldingBike(),
     items.UppababyVista(),
+    items.UppababyVistaBristolToChingford(),
     items.BikeTrailer(),
     items.SackTruck(),
     items.BackpackingTent(),
