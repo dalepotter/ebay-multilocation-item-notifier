@@ -10,8 +10,6 @@ items = KeywordSearchContainer(
     items.Brompton(),
     items.RaleighCameo(),
     items.FoldingBike(),
-    items.UppababyVista(),
-    items.UppababyVistaBristolToChingford(),
     items.BikeTrailer(),
     items.SackTruck(),
     items.BackpackingTent(),
