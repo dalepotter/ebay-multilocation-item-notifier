@@ -1,9 +1,5 @@
 from setuptools import setup, find_packages
 
-
-with open('requirements.txt') as f:
-    required_packages = f.read().splitlines()
-
 setup(
     name='ebay_multilocation_item_notifier',
     version='0.0.1',
