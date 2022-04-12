@@ -1,0 +1,5 @@
+-r requirements.txt
+beautifulsoup4==4.10.0
+pip-tools==6.5.1
+pytest==6.2.5
+pytest-mock==3.6.1
