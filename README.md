@@ -2,7 +2,7 @@
 
 Searches the ebay API for items located within a set of postcodes using the [ebaysdk-python](https://github.com/timotheus/ebaysdk-python) and sends an email summarising results.
 
-Search keywords and location postcodes are definted within `ebay_multilocation_item_notifier/item_notifier.py`.
+Search keywords and location postcodes are defined within `ebay_multilocation_item_notifier/item_notifier.py`.
 
 
 ## Set-up
