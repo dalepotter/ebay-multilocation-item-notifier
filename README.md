@@ -11,31 +11,31 @@ This is built using python 3.8.
 
 ```
 # Clone the repository
-git clone https://github.com/dalepotter/ebay_multilocation_item_notifier.git
-cd ebay_multilocation_item_notifier
+$ git clone https://github.com/dalepotter/ebay_multilocation_item_notifier.git
+$ cd ebay_multilocation_item_notifier
 
 # Set up and activate a virtual environment
-python3 -m venv pyenv
-source pyenv/bin/activate
+$ python3 -m venv pyenv
+$ source pyenv/bin/activate
 
 # Install as a package
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 
 # Set environment variables
-export OFFICE_POSTCODE='<Enter postcode>'
-export HOME_POSTCODE='<Enter postcode>'
-export EMAIL_SENDER_NAME='<Enter sender name>'
-export EMAIL_SENDER_ADDRESS='<Enter email sender address>'
-export EMAIL_RECIPIENT_NAME='<Enter email recipient name>'
-export EMAIL_RECIPIENT_ADDRESS='<Enter email recipient address>'
-export EMAIL_SMTP_HOST='<Enter email stmp host>'
-export EMAIL_SMTP_USERNAME='<Enter email smtp username>'
-export EMAIL_SMTP_PASSWORD='<Enter email smtp password>'
+$ export OFFICE_POSTCODE='<Enter postcode>'
+$ export HOME_POSTCODE='<Enter postcode>'
+$ export EMAIL_SENDER_NAME='<Enter sender name>'
+$ export EMAIL_SENDER_ADDRESS='<Enter email sender address>'
+$ export EMAIL_RECIPIENT_NAME='<Enter email recipient name>'
+$ export EMAIL_RECIPIENT_ADDRESS='<Enter email recipient address>'
+$ export EMAIL_SMTP_HOST='<Enter email stmp host>'
+$ export EMAIL_SMTP_USERNAME='<Enter email smtp username>'
+$ export EMAIL_SMTP_PASSWORD='<Enter email smtp password>'
 ```
 
 ## Running the item notifier
 ```
-python ebay_multilocation_item_notifier/item_notifier.py
+$ python ebay_multilocation_item_notifier/item_notifier.py
 ```
 
 
@@ -45,13 +45,13 @@ Unit tests can be run using Pytest:
 
 ```
 # Install dev requirements
-pip install -r requirements_dev.txt
+$ pip install -r requirements_dev.txt
 
 # Run the tests (that don't use the real eBay API)
-pytest -m 'not uses_ebay_api'
+$ pytest -m 'not uses_ebay_api'
 
 # Run all the tests (including those that use the real eBay API)
-pytest
+$ pytest
 ```
 
 
