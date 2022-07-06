@@ -21,14 +21,14 @@ cssutils==2.4.0
     #   emails
     #   premailer
 ebaysdk==2.2.0
-    # via ebay-multilocation-item-notifier
+    # via sanitized-package
 emails==0.6.0
-    # via ebay-multilocation-item-notifier
+    # via sanitized-package
 idna==3.3
     # via requests
 jinja2==3.0.3
-    # via ebay-multilocation-item-notifier
-lxml==4.8.0
+    # via sanitized-package
+lxml==4.9.1
     # via
     #   ebaysdk
     #   emails
