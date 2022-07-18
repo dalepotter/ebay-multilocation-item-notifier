@@ -4,12 +4,13 @@ from ebay_multilocation_item_notifier.keyword_search import KeywordSearch
 
 class BasicKeywordSearch(KeywordSearch):
     """Base class, where the subclass represents one item search."""
+
     remove_duplicates = True
     search_filters = {
-        'Condition': 'Used',
-        'ListingType': 'Auction',
-        'MaxDistance': '5',
-        'LocalPickupOnly': True,
+        "Condition": "Used",
+        "ListingType": "Auction",
+        "MaxDistance": "5",
+        "LocalPickupOnly": True,
         # Params for searching for sold items:
         # 'SoldItemsOnly': True
     }
@@ -19,55 +20,50 @@ class BasicKeywordSearch(KeywordSearch):
 class EbayPlymouthToBristolSearch(BasicKeywordSearch):
     search_locations = [
         #  (Location name, UK location postcode, search radius in miles (optional))
-        ('Saltash', 'PL12 4EB'),
-        ('St Germans', 'PL12 5LS'),
-        ('Liskeard', 'PL14 4DX'),
-        ('Bodmin Parkway', 'PL30 4BB'),
-
-        ('St Keyne Wishing Well Halt', 'PL14 4SE'),
-        ('Causeland', 'PL14 4ST'),
-        ('Sandplace', 'PL13 1PJ'),
-        ('Looe', 'PL13 1HN'),
-
-        ('Gunnislake', 'PL18 9DZ'),
-        ('Calstock', 'PL18 9QY'),
-        ('Bere Alston', 'PL20 7EP'),
-        ('Bere Ferrers', 'PL20 7JS'),
-
-        ('Tavistock', 'PL19 8AY'),
-
-        ('Office', os.environ['OFFICE_POSTCODE'], 20),
-        ('Plymouth', 'PL4 6AB', 20),
-        ('Ivybridge', 'PL21 0DQ'),
-        ('Totnes', 'TQ9 5JR'),
-        ('Newton Abbot', 'TQ12 2JE'),
-        ('Teignmouth', 'TQ14 8PG'),
-        ('Dawlish', 'EX7 9PJ'),
-        ('Dawlish Warren', 'EX7 0NF'),
-        ('Starcross', 'EX6 8PA'),
-        ('Exeter St Thomas', 'EX4 1AJ'),
-        ('Exeter St Davids', 'EX4 4NT', 20),
-        ('Tiverton Parkway', 'EX16 7EH'),
-        ('Taunton', 'TA1 1QP'),
-        ('Bridgwater', 'TA6 5HB'),
-        ('Highbridge & Burnham', 'TA9 3BT'),
-        ('Weston-super-Mare', 'BS23 1XY'),
-        ('Weston Milton', 'BS22 8PF'),
-        ('Worle', 'BS22 6WA'),
-        ('Yatton', 'BS49 4AJ'),
-        ('Nailsea & Backwell', 'BS48 3LH'),
-        ('Parson Street', 'BS3 5PU'),
-        ('Bedminster', 'BS3 4LU'),
-        ('Bristol Temple Meads', 'BS1 6QF', 20),
-        ('Home', os.environ['HOME_POSTCODE'], 20)
+        ("Saltash", "PL12 4EB"),
+        ("St Germans", "PL12 5LS"),
+        ("Liskeard", "PL14 4DX"),
+        ("Bodmin Parkway", "PL30 4BB"),
+        ("St Keyne Wishing Well Halt", "PL14 4SE"),
+        ("Causeland", "PL14 4ST"),
+        ("Sandplace", "PL13 1PJ"),
+        ("Looe", "PL13 1HN"),
+        ("Gunnislake", "PL18 9DZ"),
+        ("Calstock", "PL18 9QY"),
+        ("Bere Alston", "PL20 7EP"),
+        ("Bere Ferrers", "PL20 7JS"),
+        ("Tavistock", "PL19 8AY"),
+        ("Office", os.environ["OFFICE_POSTCODE"], 20),
+        ("Plymouth", "PL4 6AB", 20),
+        ("Ivybridge", "PL21 0DQ"),
+        ("Totnes", "TQ9 5JR"),
+        ("Newton Abbot", "TQ12 2JE"),
+        ("Teignmouth", "TQ14 8PG"),
+        ("Dawlish", "EX7 9PJ"),
+        ("Dawlish Warren", "EX7 0NF"),
+        ("Starcross", "EX6 8PA"),
+        ("Exeter St Thomas", "EX4 1AJ"),
+        ("Exeter St Davids", "EX4 4NT", 20),
+        ("Tiverton Parkway", "EX16 7EH"),
+        ("Taunton", "TA1 1QP"),
+        ("Bridgwater", "TA6 5HB"),
+        ("Highbridge & Burnham", "TA9 3BT"),
+        ("Weston-super-Mare", "BS23 1XY"),
+        ("Weston Milton", "BS22 8PF"),
+        ("Worle", "BS22 6WA"),
+        ("Yatton", "BS49 4AJ"),
+        ("Nailsea & Backwell", "BS48 3LH"),
+        ("Parson Street", "BS3 5PU"),
+        ("Bedminster", "BS3 4LU"),
+        ("Bristol Temple Meads", "BS1 6QF", 20),
+        ("Home", os.environ["HOME_POSTCODE"], 20),
     ]
 
 
 class EbayBristolToChingfordSearch(BasicKeywordSearch):
     search_locations = [
         #  (Location name, UK location postcode, search radius in miles (optional))
-        ('Home', os.environ['HOME_POSTCODE'], 10),
-
+        ("Home", os.environ["HOME_POSTCODE"], 10),
         ("M4 J20", "BS32 4JT"),
         ("M4 J19", "BS16 1SX"),
         ("M4 J18", "BS37 6EJ"),
@@ -86,7 +82,6 @@ class EbayBristolToChingfordSearch(BasicKeywordSearch):
         ("M4 J7", "SL1 5LX"),
         ("M4 J6", "SL1 2SZ"),
         ("M4 J5", "SL3 8UG"),
-
         ("M25 J14", "SL3 0FD"),
         ("M25 J15", "UB7 7HQ"),
         ("M25 J16", "SL0 0NY"),
@@ -101,17 +96,15 @@ class EbayBristolToChingfordSearch(BasicKeywordSearch):
         ("M25 J24", "EN6 5ER"),
         ("M25 J25", "EN8 8EZ"),
         ("M25 J26", "EN9 3QY"),
-
         ("Chingford station", "E4 6AL", 10),
-        ("Piccadilly Circus station", "W1J 9HS", 10)
+        ("Piccadilly Circus station", "W1J 9HS", 10),
     ]
 
 
 class EbayBristolToExeterSearch(BasicKeywordSearch):
     search_locations = [
         #  (Location name, UK location postcode, search radius in miles (optional))
-        ('Home', os.environ['HOME_POSTCODE'], 10),
-
+        ("Home", os.environ["HOME_POSTCODE"], 10),
         ("M5 J18", "BS11 8DL"),
         ("M5 J19", "BS20 7XG"),
         ("M5 J20", "BS21 6XU"),
@@ -125,54 +118,53 @@ class EbayBristolToExeterSearch(BasicKeywordSearch):
         ("M5 J28", "EX15 1NS"),
         ("M5 J29", "EX5 2AQ"),
         ("M5 J30", "EX2 7JJ"),
-
-        ("Exeter St Davids station", "EX4 4NT", 20)
+        ("Exeter St Davids station", "EX4 4NT", 20),
     ]
 
 
 class NailPuller(EbayBristolToExeterSearch):
-    search_keyword = 'nail puller -crow'
+    search_keyword = "nail puller -crow"
 
 
 class Morgedal(EbayBristolToExeterSearch):
-    search_keyword = 'morgedal'
-    search_filters = {'MaxPrice': 50}
+    search_keyword = "morgedal"
+    search_filters = {"MaxPrice": 50}
 
 
 class WallpaperSteamer(EbayBristolToExeterSearch):
-    search_keyword = 'wallpaper (stripper, steamer)'
-    search_filters = {'MaxPrice': 10}
+    search_keyword = "wallpaper (stripper, steamer)"
+    search_filters = {"MaxPrice": 10}
 
 
 class Brompton(EbayBristolToExeterSearch):
     search_keyword = "brompton"
-    search_filters = {'MaxPrice': 150}
+    search_filters = {"MaxPrice": 150}
 
 
 class RaleighCameo(EbayBristolToExeterSearch):
-    search_keyword = 'raleigh cameo'
+    search_keyword = "raleigh cameo"
 
 
 class FoldingBike(EbayBristolToExeterSearch):
     search_keyword = "folding (bike, bicycle) -(exercise, motor, quad, rack)"
-    search_filters = {'MaxPrice': 80}
+    search_filters = {"MaxPrice": 80}
 
 
 class BikeTrailer(EbayBristolToExeterSearch):
     search_keyword = "(bike, cycle) trailer"
-    search_filters = {'MaxPrice': 25}
+    search_filters = {"MaxPrice": 25}
 
 
 class SackTruck(EbayBristolToExeterSearch):
     search_keyword = "sack truck -(antique, vintage, wooden)"
-    search_filters = {'MaxPrice': 20}
+    search_filters = {"MaxPrice": 20}
 
 
 class BackpackingTent(EbayBristolToExeterSearch):
     search_keyword = "(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent"
-    search_filters = {'MaxPrice': 40}
+    search_filters = {"MaxPrice": 40}
 
 
 class Bike(EbayBristolToExeterSearch):
     search_keyword = "(bike, bicycle) -(boys, childs, exercise, girls, journal, kids, magazine, motor, quad, rack)"
-    search_filters = {'MaxPrice': 15}
+    search_filters = {"MaxPrice": 15}

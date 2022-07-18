@@ -5,12 +5,15 @@ from ebaysdk.finding import Connection
 
 class KeywordSearchMeta(type):
     """Meta class controlling behaviour of new class objects."""
+
     def __new__(cls, name, bases, attrs):
         """Merge `.search_filters` from parent classes (if permitted by the child class)."""
         new_cls = super(KeywordSearchMeta, cls).__new__(cls, name, bases, attrs)
 
         if new_cls.merge_parent_search_filters:
-            base_search_filters = [bc.search_filters for bc in bases if hasattr(bc, 'search_filters')]
+            base_search_filters = [
+                bc.search_filters for bc in bases if hasattr(bc, "search_filters")
+            ]
             search_filters = base_search_filters + [new_cls.search_filters]
 
             new_cls.search_filters = {}
@@ -22,12 +25,13 @@ class KeywordSearchMeta(type):
 
 class KeywordSearch(metaclass=KeywordSearchMeta):
     """Base class, where the subclass represents one item search."""
+
     cached_results = {}
     location_radius_overrides_default_search_radius = True
     merge_parent_search_filters = True
     search_filters = {
-        'LocalPickupOnly': True,
-        'MaxDistance': '5'
+        "LocalPickupOnly": True,
+        "MaxDistance": "5",
     }  # Available item filters: https://developer.ebay.com/devzone/finding/CallRef/types/ItemFilterType.html
     search_keyword = ""
     search_locations = []
@@ -44,9 +48,9 @@ class KeywordSearch(metaclass=KeywordSearchMeta):
         results = dict()
 
         api = Connection(
-            appid='DP1dc611a-5511-41c1-b35e-99291acf532',
-            siteid='EBAY-GB',
-            config_file=None
+            appid="DP1dc611a-5511-41c1-b35e-99291acf532",
+            siteid="EBAY-GB",
+            config_file=None,
         )
 
         for search_location in self.search_locations:
@@ -55,37 +59,41 @@ class KeywordSearch(metaclass=KeywordSearchMeta):
             item_filters = self.search_filters.copy()
             if self.location_radius_overrides_default_search_radius:
                 try:
-                    item_filters.update({'MaxDistance': str(search_location[2])})
+                    item_filters.update({"MaxDistance": str(search_location[2])})
                 except IndexError:
                     pass
 
             try:
                 api_payload = {
-                    'keywords': self.search_keyword,
-                    'itemFilter': self.generate_item_filter_list(item_filters),
-                    'buyerPostalCode': postcode
+                    "keywords": self.search_keyword,
+                    "itemFilter": self.generate_item_filter_list(item_filters),
+                    "buyerPostalCode": postcode,
                 }
 
                 # Search for listings
-                response = api.execute('findItemsAdvanced', api_payload)
+                response = api.execute("findItemsAdvanced", api_payload)
                 #  API verb for completed items: findCompletedItems
 
-                assert(response.reply.ack == 'Success')
-                assert(type(response.reply.timestamp) == datetime.datetime)
-                assert(type(response.dict()) == dict)
+                assert response.reply.ack == "Success"
+                assert type(response.reply.timestamp) == datetime.datetime
+                assert type(response.dict()) == dict
 
             except ConnectionError as e:
                 print(e)
                 print(e.response.dict())
 
-            print("Search keyword: {} - search_location: {} - Results for this location: {}".format(
-                self.search_keyword,
-                search_location,
-                response.reply.searchResult._count
-            ))
+            print(
+                "Search keyword: {} - search_location: {} - Results for this location: {}".format(
+                    self.search_keyword,
+                    search_location,
+                    response.reply.searchResult._count,
+                )
+            )
 
             # Append search result to the output dictionary
-            results[search_location_name] = response.reply.searchResult  # ebaysdk.response.ResponseDataObject
+            results[
+                search_location_name
+            ] = response.reply.searchResult  # ebaysdk.response.ResponseDataObject
 
         return results
 
@@ -105,12 +113,7 @@ class KeywordSearch(metaclass=KeywordSearchMeta):
         item_filters.update(custom_item_filters)
         output = list()
         for key, value in item_filters.items():
-            output.append(
-                {
-                    'name': key,
-                    'value': value
-                }
-            )
+            output.append({"name": key, "value": value})
 
         return output
 
@@ -132,7 +135,9 @@ class KeywordSearch(metaclass=KeywordSearchMeta):
             for location, loc_results in output.items():
                 try:
                     output[location].item = [
-                        itm for itm in output[location].item if itm.itemId not in seen_item_ids
+                        itm
+                        for itm in output[location].item
+                        if itm.itemId not in seen_item_ids
                     ]
                     seen_item_ids += [item.itemId for item in loc_results.item]
                 except AttributeError:
