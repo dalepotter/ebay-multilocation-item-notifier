@@ -1,8 +1,9 @@
 from emails.template import JinjaTemplate
 
 
-class KeywordSearchContainer():
+class KeywordSearchContainer:
     """Represents a container for items to be searched for."""
+
     search_list = []
 
     def __init__(self, *args):
@@ -22,7 +23,9 @@ class KeywordSearchContainer():
         Returns:
             str -- Summary of results in HTML format.
         """
-        with open('ebay_multilocation_item_notifier/templates/notification-email.html') as fp:
+        with open(
+            "ebay_multilocation_item_notifier/templates/notification-email.html"
+        ) as fp:
             template = JinjaTemplate(fp.read())
 
         return template.render(search_list=self.search_list)
