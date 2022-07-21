@@ -2,7 +2,7 @@
 
 Searches the ebay API for items located within a set of postcodes using the [ebaysdk-python](https://github.com/timotheus/ebaysdk-python) and sends an email summarising results.
 
-Search keywords and location postcodes are defined within `ebay_multilocation_item_notifier/item_notifier.py`.
+Usage may include searching for items along a transportation route.
 
 
 ## Set-up
@@ -33,7 +33,41 @@ $ export EMAIL_SMTP_USERNAME='<Enter email smtp username>'
 $ export EMAIL_SMTP_PASSWORD='<Enter email smtp password>'
 ```
 
+# Customising searches for keywords/locations
+
+An entirely new keyword search must subclass `ebay_multilocation_item_notifier.keyword_search.KeywordSearch`.  It must include class attributes of:
+- `search_keyword` (string, the keyword used for finding items)
+- `search_filters` (dict with kay/value pairs of [available item filters](https://developer.ebay.com/devzone/finding/CallRef/types/ItemFilterType.html))
+- `search_locations` (list of tuples `(Location name, UK location postcode, search radius in miles (optional))`).  
+
+The optional `remove_duplicates` (boolean) attribute willy only output an item at the first location where it is found.
+
+Example:
+```python
+class Bike(KeywordSearch):
+    """Set up a search that can be expected to return a large number of items."""
+
+    search_keyword = "(bike, bicycle)"
+    search_filters = {"MaxPrice": 1000}
+    search_locations = [
+        #  (Location name, UK location postcode, search radius in miles (optional))
+        ("London Charing Cross Station", "WC2N 5HF"),
+        ("Birmingham New Street Station", "B2 4QA", 20),
+        ("Edinburgh Waverley Station", "EH8 8DL"),
+    ]
+```
+
+The search object must be added/appended to the `KeywordSearchContainer` in `ebay_multilocation_item_notifier/item_notifier.py`.
+
+Example:
+```python
+items = KeywordSearchContainer(Bike)
+```
+
 ## Running the item notifier
+
+The following command will make ebay API calls for items at each defined postcode.  The compiled results will be sent the email address defined in the `EMAIL_RECIPIENT_ADDRESS` environment variable.
+
 ```
 $ python ebay_multilocation_item_notifier/item_notifier.py
 ```
