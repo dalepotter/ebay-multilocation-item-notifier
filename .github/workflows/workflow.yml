@@ -24,6 +24,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements_dev.txt
       - name: Test with pytest (unit tests)
+        env:
+          PYTEST_ADDOPTS: --color=yes  # Force colour output
         run: |
           pytest ebay_multilocation_item_notifier/tests/unit/
       - name: Test with pytest (integration tests)
@@ -35,6 +37,7 @@ jobs:
           EMAIL_SMTP_HOST: ${{ secrets.EMAIL_SMTP_HOST }}
           EMAIL_SMTP_PASSWORD: ${{ secrets.EMAIL_SMTP_PASSWORD }}
           EMAIL_SMTP_USERNAME: ${{ secrets.EMAIL_SMTP_USERNAME }}
+          PYTEST_ADDOPTS: --color=yes  # Force colour output
         run: |
           pytest ebay_multilocation_item_notifier/tests/integration/
       - name: Send digest email
