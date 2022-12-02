@@ -24,11 +24,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements_dev.txt
       - name: Test with pytest (unit tests)
-        env:
-          PYTEST_ADDOPTS: --color=yes  # Force colour output
         run: |
           pytest ebay_multilocation_item_notifier/tests/unit/
+        env:
+          PYTEST_ADDOPTS: --color=yes  # Force colour output
       - name: Test with pytest (integration tests)
+        run: |
+          pytest ebay_multilocation_item_notifier/tests/integration/
         env:
           EMAIL_RECIPIENT_ADDRESS: ${{ secrets.EMAIL_RECIPIENT_ADDRESS }}
           EMAIL_RECIPIENT_NAME: ${{ secrets.EMAIL_RECIPIENT_NAME }}
@@ -38,18 +40,16 @@ jobs:
           EMAIL_SMTP_PASSWORD: ${{ secrets.EMAIL_SMTP_PASSWORD }}
           EMAIL_SMTP_USERNAME: ${{ secrets.EMAIL_SMTP_USERNAME }}
           PYTEST_ADDOPTS: --color=yes  # Force colour output
-        run: |
-          pytest ebay_multilocation_item_notifier/tests/integration/
       - name: Send digest email
-        env:
-          EMAIL_RECIPIENT_ADDRESS: ${{ secrets.EMAIL_RECIPIENT_ADDRESS }}
-          EMAIL_RECIPIENT_NAME: ${{ secrets.EMAIL_RECIPIENT_NAME }}
-          EMAIL_SENDER_ADDRESS: ${{ secrets.EMAIL_SENDER_ADDRESS }}
-          EMAIL_SENDER_NAME: ${{ secrets.EMAIL_SENDER_NAME }}
-          EMAIL_SMTP_HOST: ${{ secrets.EMAIL_SMTP_HOST }}
-          EMAIL_SMTP_PASSWORD: ${{ secrets.EMAIL_SMTP_PASSWORD }}
-          EMAIL_SMTP_USERNAME: ${{ secrets.EMAIL_SMTP_USERNAME }}
         if: github.ref == 'refs/heads/master'
         run: |
           python ebay_multilocation_item_notifier/item_notifier.py
+        env:
+          EMAIL_RECIPIENT_ADDRESS: ${{ secrets.EMAIL_RECIPIENT_ADDRESS }}
+          EMAIL_RECIPIENT_NAME: ${{ secrets.EMAIL_RECIPIENT_NAME }}
+          EMAIL_SENDER_ADDRESS: ${{ secrets.EMAIL_SENDER_ADDRESS }}
+          EMAIL_SENDER_NAME: ${{ secrets.EMAIL_SENDER_NAME }}
+          EMAIL_SMTP_HOST: ${{ secrets.EMAIL_SMTP_HOST }}
+          EMAIL_SMTP_PASSWORD: ${{ secrets.EMAIL_SMTP_PASSWORD }}
+          EMAIL_SMTP_USERNAME: ${{ secrets.EMAIL_SMTP_USERNAME }}
       - uses: gautamkrishnar/keepalive-workflow@master  # Push dummy commit after 50 days of inactivity (to keep Github Scheduled Action alive)
