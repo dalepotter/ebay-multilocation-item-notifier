@@ -122,6 +122,11 @@ class EbayBristolToExeterSearch(BasicKeywordSearch):
     ]
 
 
+class EasiFill(EbayBristolToChingfordSearch):
+    search_keyword = "(easifill, easyfill, easi fill, easy fill)"
+    search_filters = {"MaxPrice": 10}
+
+
 class NailPuller(EbayBristolToChingfordSearch):
     search_keyword = "nail puller -crow"
 
