@@ -122,54 +122,54 @@ class EbayBristolToExeterSearch(BasicKeywordSearch):
     ]
 
 
-class EasiFill(EbayBristolToChingfordSearch):
+class EasiFill(EbayBristolToExeterSearch):
     search_keyword = "(easifill, easyfill, easi fill, easy fill)"
     search_filters = {"MaxPrice": 10}
 
 
-class NailPuller(EbayBristolToChingfordSearch):
+class NailPuller(EbayBristolToExeterSearch):
     search_keyword = "nail puller -crow"
 
 
-class Morgedal(EbayBristolToChingfordSearch):
+class Morgedal(EbayBristolToExeterSearch):
     search_keyword = "morgedal"
     search_filters = {"MaxPrice": 50}
 
 
-class WallpaperSteamer(EbayBristolToChingfordSearch):
+class WallpaperSteamer(EbayBristolToExeterSearch):
     search_keyword = "wallpaper (stripper, steamer)"
     search_filters = {"MaxPrice": 10}
 
 
-class Brompton(EbayBristolToChingfordSearch):
+class Brompton(EbayBristolToExeterSearch):
     search_keyword = "brompton"
     search_filters = {"MaxPrice": 150}
 
 
-class RaleighCameo(EbayBristolToChingfordSearch):
+class RaleighCameo(EbayBristolToExeterSearch):
     search_keyword = "raleigh cameo"
 
 
-class FoldingBike(EbayBristolToChingfordSearch):
+class FoldingBike(EbayBristolToExeterSearch):
     search_keyword = "folding (bike, bicycle) -(exercise, motor, quad, rack)"
     search_filters = {"MaxPrice": 80}
 
 
-class BikeTrailer(EbayBristolToChingfordSearch):
+class BikeTrailer(EbayBristolToExeterSearch):
     search_keyword = "(bike, cycle) trailer"
     search_filters = {"MaxPrice": 25}
 
 
-class SackTruck(EbayBristolToChingfordSearch):
+class SackTruck(EbayBristolToExeterSearch):
     search_keyword = "sack truck -(antique, vintage, wooden)"
     search_filters = {"MaxPrice": 20}
 
 
-class BackpackingTent(EbayBristolToChingfordSearch):
+class BackpackingTent(EbayBristolToExeterSearch):
     search_keyword = "(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent"
     search_filters = {"MaxPrice": 40}
 
 
-class Bike(EbayBristolToChingfordSearch):
+class Bike(EbayBristolToExeterSearch):
     search_keyword = "(bike, bicycle) -(boys, childs, exercise, girls, journal, kids, magazine, motor, quad, rack)"
     search_filters = {"MaxPrice": 15}
