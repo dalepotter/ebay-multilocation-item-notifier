@@ -6,6 +6,7 @@ from ebay_multilocation_item_notifier.keyword_search_container import (
 )
 
 items = KeywordSearchContainer(
+    items.Dyson(),
     items.EasiFill(),
     items.NailPuller(),
     items.Morgedal(),

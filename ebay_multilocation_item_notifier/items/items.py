@@ -122,6 +122,11 @@ class EbayBristolToExeterSearch(BasicKeywordSearch):
     ]
 
 
+class Dyson(EbayBristolToExeterSearch):
+    search_keyword = "dyson -(cordless, handheld)"
+    search_filters = {"MaxPrice": 15}
+
+
 class EasiFill(EbayBristolToExeterSearch):
     search_keyword = "(easifill, easyfill, easi fill, easy fill)"
     search_filters = {"MaxPrice": 10}
