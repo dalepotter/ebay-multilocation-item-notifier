@@ -122,6 +122,11 @@ class EbayBristolToExeterSearch(BasicKeywordSearch):
     ]
 
 
+class HpScanner(EbayBristolToExeterSearch):
+    search_keyword = "hp (scanner, all in one, all-in-one, envy, deskjet)"
+    search_filters = {"MaxPrice": 15}
+
+
 class Dyson(EbayBristolToExeterSearch):
     search_keyword = "dyson -(cordless, handheld, part, parts)"
     search_filters = {"MaxPrice": 15}
