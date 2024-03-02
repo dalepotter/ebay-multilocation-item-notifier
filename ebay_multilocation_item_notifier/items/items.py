@@ -171,7 +171,7 @@ class BikeTrailer(EbayBristolToExeterSearch):
 
 
 class SackTruck(EbayBristolToExeterSearch):
-    search_keyword = "sack truck -(antique, vintage, wooden)"
+    search_keyword = "sack truck -(antique, dinky, vintage, wooden)"
     search_filters = {"MaxPrice": 20}
 
 
