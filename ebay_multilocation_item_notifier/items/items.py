@@ -122,12 +122,12 @@ class EbayBristolToExeterSearch(BasicKeywordSearch):
     ]
 
 
-class HpScanner(EbayBristolToExeterSearch):
+class HpScanner(EbayBristolToChingfordSearch):
     search_keyword = "hp (scanner, all in one, all-in-one, envy, deskjet)"
     search_filters = {"MaxPrice": 15}
 
 
-class Dyson(EbayBristolToExeterSearch):
+class Dyson(EbayBristolToChingfordSearch):
     search_keyword = "dyson -(cordless, handheld, part, parts)"
     search_filters = {"MaxPrice": 15}
 
@@ -137,49 +137,49 @@ class EasiFill(EbayBristolToExeterSearch):
     search_filters = {"MaxPrice": 10}
 
 
-class NailPuller(EbayBristolToExeterSearch):
+class NailPuller(EbayBristolToChingfordSearch):
     search_keyword = "nail puller -crow"
 
 
-class Morgedal(EbayBristolToExeterSearch):
+class Morgedal(EbayBristolToChingfordSearch):
     search_keyword = "morgedal"
     search_filters = {"MaxPrice": 50}
 
 
-class WallpaperSteamer(EbayBristolToExeterSearch):
+class WallpaperSteamer(EbayBristolToChingfordSearch):
     search_keyword = "wallpaper (stripper, steamer)"
     search_filters = {"MaxPrice": 10}
 
 
-class Brompton(EbayBristolToExeterSearch):
+class Brompton(EbayBristolToChingfordSearch):
     search_keyword = "brompton"
     search_filters = {"MaxPrice": 150}
 
 
-class RaleighCameo(EbayBristolToExeterSearch):
+class RaleighCameo(EbayBristolToChingfordSearch):
     search_keyword = "raleigh cameo"
 
 
-class FoldingBike(EbayBristolToExeterSearch):
+class FoldingBike(EbayBristolToChingfordSearch):
     search_keyword = "folding (bike, bicycle) -(exercise, motor, quad, rack)"
     search_filters = {"MaxPrice": 80}
 
 
-class BikeTrailer(EbayBristolToExeterSearch):
+class BikeTrailer(EbayBristolToChingfordSearch):
     search_keyword = "(bike, cycle) trailer"
     search_filters = {"MaxPrice": 25}
 
 
-class SackTruck(EbayBristolToExeterSearch):
+class SackTruck(EbayBristolToChingfordSearch):
     search_keyword = "sack truck -(antique, dinky, vintage, wooden)"
     search_filters = {"MaxPrice": 20}
 
 
-class BackpackingTent(EbayBristolToExeterSearch):
+class BackpackingTent(EbayBristolToChingfordSearch):
     search_keyword = "(back pack, back packer, back packers, back packing, backpack, backpacker, backpackers, backpacking, hiking) tent"
     search_filters = {"MaxPrice": 40}
 
 
-class Bike(EbayBristolToExeterSearch):
+class Bike(EbayBristolToChingfordSearch):
     search_keyword = "(bike, bicycle) -(boys, childs, exercise, girls, journal, kids, magazine, motor, quad, rack)"
     search_filters = {"MaxPrice": 15}
