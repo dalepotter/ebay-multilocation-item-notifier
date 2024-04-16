@@ -124,7 +124,7 @@ class EbayBristolToExeterSearch(BasicKeywordSearch):
 
 class HpScanner(EbayBristolToChingfordSearch):
     search_keyword = "hp (scanner, all in one, all-in-one, envy, deskjet)"
-    search_filters = {"MaxPrice": 15}
+    search_filters = {"MaxPrice": 5}
 
 
 class Dyson(EbayBristolToChingfordSearch):
