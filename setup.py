@@ -8,5 +8,5 @@ setup(
     author_email="dalepotter@gmail.com",
     description="Search the ebay API to find items located close to a set of postcodes.",
     packages=find_packages(),
-    install_requires=["ebaysdk>=2.2.0", "emails==0.6.0", "Jinja2==3.0.3"],
+    install_requires=["ebaysdk>=2.2.0", "emails==0.6.0", "Jinja2==3.1.3"],
 )
