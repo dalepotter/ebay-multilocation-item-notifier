@@ -24,7 +24,7 @@ ebaysdk==2.2.0
     # via ebay-multilocation-item-notifier
 emails==0.6
     # via ebay-multilocation-item-notifier
-idna==3.3
+idna==3.7
     # via requests
 jinja2==3.0.3
     # via ebay-multilocation-item-notifier
