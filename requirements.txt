@@ -8,7 +8,7 @@
     # via -r requirements.in
 cachetools==5.0.0
     # via premailer
-certifi==2021.10.8
+certifi==2023.7.22
     # via requests
 chardet==4.0.0
     # via emails
@@ -22,7 +22,7 @@ cssutils==2.4.0
     #   premailer
 ebaysdk==2.2.0
     # via ebay-multilocation-item-notifier
-emails==0.6.0
+emails==0.6
     # via ebay-multilocation-item-notifier
 idna==3.3
     # via requests

@@ -16,7 +16,7 @@ cachetools==5.0.0
     # via
     #   -r requirements.txt
     #   premailer
-certifi==2021.10.8
+certifi==2023.7.22
     # via
     #   -r requirements.txt
     #   requests
@@ -45,7 +45,7 @@ ebaysdk==2.2.0
     # via
     #   -r requirements.txt
     #   ebay-multilocation-item-notifier
-emails==0.6.0
+emails==0.6
     # via
     #   -r requirements.txt
     #   ebay-multilocation-item-notifier
