@@ -101,7 +101,7 @@ python-dateutil==2.8.2
     # via
     #   -r requirements.txt
     #   emails
-requests==2.27.1
+requests==2.31.0
     # via
     #   -r requirements.txt
     #   ebaysdk
