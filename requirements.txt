@@ -39,7 +39,7 @@ premailer==3.10.0
     # via emails
 python-dateutil==2.8.2
     # via emails
-requests==2.27.1
+requests==2.31.0
     # via
     #   ebaysdk
     #   emails
