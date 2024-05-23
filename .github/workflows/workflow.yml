@@ -1,4 +1,4 @@
-name: Run tests and (if on master) send email digest
+name: Run tests and (if on main branch) send email digest
 
 on:
   push:
@@ -41,7 +41,7 @@ jobs:
           EMAIL_SMTP_USERNAME: ${{ secrets.EMAIL_SMTP_USERNAME }}
           PYTEST_ADDOPTS: --color=yes  # Force colour output
       - name: Send digest email
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: |
           python ebay_multilocation_item_notifier/item_notifier.py
         env:
