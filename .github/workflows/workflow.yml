@@ -26,13 +26,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements_dev.txt
 
-      - name: Test with pytest (unit tests)
+      - name: Run unit tests
         run: |
           pytest ebay_multilocation_item_notifier/tests/unit/
         env:
           PYTEST_ADDOPTS: --color=yes  # Force colour output
 
-      - name: Test with pytest (integration tests)
+      - name: Run integration tests
         run: |
           pytest ebay_multilocation_item_notifier/tests/integration/
         env:
