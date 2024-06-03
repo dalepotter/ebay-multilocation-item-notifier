@@ -6,7 +6,8 @@ on:
     - cron: '30 4 * * *'  # 04:30 every day
 
 jobs:
-  build:
+  test-and-send:
+    name: Run tests and run item finder
     runs-on: ubuntu-latest
 
     env:
