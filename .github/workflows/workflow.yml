@@ -59,4 +59,16 @@ jobs:
           EMAIL_SMTP_PASSWORD: ${{ secrets.EMAIL_SMTP_PASSWORD }}
           EMAIL_SMTP_USERNAME: ${{ secrets.EMAIL_SMTP_USERNAME }}
 
-      - uses: gautamkrishnar/keepalive-workflow@master  # Push dummy commit after 50 days of inactivity (to keep Github Scheduled Action alive)
+  keep-repo-active:
+    name: Keep repo active to persist schedule trigger
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: gautamkrishnar/keepalive-workflow@v2  # Uses GitHub API to keep the repository active (in order to persist the GitHub Actions `schedule` trigger)
+        with:
+          time_elapsed: "50"  # Default is 45
