@@ -10,7 +10,6 @@ items = KeywordSearchContainer(
     items.Dyson(),
     items.EasiFill(),
     items.NailPuller(),
-    items.Morgedal(),
     items.WallpaperSteamer(),
     items.Brompton(),
     items.RaleighCameo(),
