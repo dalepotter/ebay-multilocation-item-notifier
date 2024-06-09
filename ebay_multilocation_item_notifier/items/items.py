@@ -161,7 +161,7 @@ class FoldingBike(EbayBristolToChingfordSearch):
 
 
 class BikeTrailer(EbayBristolToChingfordSearch):
-    search_keyword = "(bike, cycle) trailer"
+    search_keyword = "(bike, cycle) trailer -(tag, tagalong)"
     search_filters = {"MaxPrice": 25}
 
 
