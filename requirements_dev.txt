@@ -16,7 +16,7 @@ cachetools==5.0.0
     # via
     #   -r requirements.txt
     #   premailer
-certifi==2023.7.22
+certifi==2024.7.4
     # via
     #   -r requirements.txt
     #   requests
