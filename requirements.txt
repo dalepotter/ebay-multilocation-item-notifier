@@ -8,7 +8,7 @@
     # via -r requirements.in
 cachetools==5.0.0
     # via premailer
-certifi==2023.7.22
+certifi==2024.7.4
     # via requests
 chardet==4.0.0
     # via emails
